@@ -1,0 +1,7 @@
+.TaskTable-row {
+	color: #400000;
+}
+.TaskTable-row:hover {
+	color: #FFFFFF;
+	background-color: #400000;
+}
