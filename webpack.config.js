@@ -1,15 +1,15 @@
 var nodeExternals = require('webpack-node-externals');
 
 module.exports = [
-//  {
-//    entry: './index.js',
-//    output:  {
-//      path: __dirname,
-//      filename: 'server.js'
-//    },
-//    target: 'node',
-//    externals: nodeExternals()
-//  },
+  {
+    entry: './index.js',
+    output:  {
+      path: __dirname,
+      filename: 'server.js'
+    },
+    target: 'node',
+    externals: nodeExternals()
+  },
   {
     entry: './src/spapp/index.jsx',
     output: {
