@@ -1,0 +1,41 @@
+{
+  "name": "aspire-task-manager",
+  "version": "1.0.0",
+  "description": "Task manager application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexFrozen/aspire-task-manager.git"
+  },
+  "keywords": [
+    "ERP",
+    "taskmanager",
+    "management"
+  ],
+  "author": "AlexAnder Moiseev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexFrozen/aspire-task-manager/issues"
+  },
+  "homepage": "https://github.com/AlexFrozen/aspire-task-manager#readme",
+  "dependencies": {
+    "express": "4.16",
+    "mongodb": "^2.2.33",
+    "react": "16",
+    "react-dom": "16"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.7",
+    "style-loader": "^0.19.0",
+    "webpack": "^3.8.1",
+    "webpack-node-externals": "^1.6.0"
+  }
+}
