@@ -1,0 +1,157 @@
+<html>
+<head>
+<title>Aspire task manager developers documentation</title>
+<style>
+body {
+	padding: 0;
+	background-color: #404040;
+}
+.wrap {
+	background-color: #AAFFAA;
+	width: 662px;
+	margin: auto;
+}
+.body {
+	padding: 0;
+	margin: auto;
+	width: 640px;
+	border-left: 1px solid #004000;
+	border-right: 1px solid #004000;
+}
+.menu {
+	margin: 0;
+	padding: 0;
+	height: 33px;
+	line-height: 32px;
+	font-size: 24px;
+	border-bottom: 1px solid #004000;
+}
+.menuitem-active, .menuitem {
+	display: block;
+	float: left;
+	width: 128px;
+	height: 32px;
+	text-decoration: none;
+	text-align: center;
+}
+.menuitem-active {
+	color: #400000;
+	border-right: 1px solid #400000;
+}
+.menuitem, .menuitem:visited {
+	color: #004000;
+	border-right: 1px solid #004000;
+}
+.menuitem:hover {
+	color: #800000;
+	border-right: 1px solid #800000;
+}
+.content {
+	padding: 10px;
+	font-size: 14px;
+}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="body">
+
+<div class="menu">
+	<a class="menuitem" href="index.html">Home</a>
+	<div class="menuitem-active" href="spa.html">SPA</div>
+	<a class="menuitem" href="routes.html">Routes</a>
+	<a class="menuitem" href="api.html">REST API</a>
+</div>
+<div class="content">
+<h4><center>Single Page Application architecture</center></h4>
+<p>SPA is written on <i>React</i> library and built in <i>Node JS</i> environment. Using <i>express</i> module for <i>Node JS</i> we created default template with empty container. CSS stylesheet is not loaded via <b>link</b> of HTML5, but all styles for all elements included in main <i>Java Script</i> bundle. This bundle is build with <i>webpack</i> utility from a bunch of .css, .js and .jsx files. Main SPA template will load this bundle via <b>script</b> element of HTML.</p>
+<h5>Visual part and component composition of application</h5>
+<p>Application developed in OOP fashion. Self drawing objects composed more complex objects and whole application looks like tree of visual objects. The root object is <b>App</b> and contains two objects inside: <b>Top</b> and <b>Desktop</b> as shown in picture below.</p>
+<center><img src="images/app.png" width="345" height="171"></center>
+<p><b>Top</b> is some kind of header or even menu and <b>Desktop</b> is container for elements, like pages. <b>Auth</b> is component for authorization and authentication mechanism of application. If user is authorized, it shows his full name and a button to logout.</p>
+<center><img src="images/login_control_in.png" width="345" height="88"></center>
+<p>When user is logged in, the application has <u>authorized</u> substate set to <b>true</b>. If it's <b>false</b>, <b>Auth</b> object shows <b>InputEdit</b>, <b>InputPass</b> and a <b>Button</b> to login.</p>
+<center><img src="images/login_control_out.png" width="345" height="88"></center>
+<p>When application is not <u>authorized</u>, there's no menu buttons in <b>App</b> object and even no <b>SetOfButtons</b> object in DOM tree. Otherwise, there are buttons for controlling <b>Desktop</b> object. Authorized user can be admin or regular user. If admin is logged in, there showld be <u>isAdmin</u> application substate set to <b>true</b>. In this substate application should give users control feature and it's done with control buttons in <b>Top</b>.</p>
+<center><img src="images/control_buttons.png" width="345" height="88"></center>
+<p>There are more substates which control <b>Desktop</b> object internals and <b>Top</b> object removing buttons.</p>
+<ul>
+	<li><u>welcome</u> shows banner.
+	<li><u>TaskEditor</u> shows form to create or edit task and hides "New task" button.
+	<li><u>TaskViewer</u> shows detailed page with description of task.
+	<li><u>TaskListViewer</u> shows table with tasks and hides "Task list" button.
+	<li><u>UserEditor</u> shows form to create or edit user and hides "New user" button.
+	<li><u>UsersViewer</u> shows table with all users and hides "Users" button.
+</ul>
+<p>Buttons "Users" and "New user" showld be accessible only if <u>isAdmin</u> substate is <b>true</b>. There should be no other way to switch application to <u>UserEditor</u> and <u>UsersViewer</u> substates except of pressing buttons in <b>SetOfButtons</b> of <b>Top</b> object of application. Here's <b>App</b> state structure:</p>
+<pre>
+{
+  user: {
+    authorized: enum(true, false),
+    isAdmin: enum(true, false),
+    eMail: string,
+    firstName: string,
+    lastName: string
+  }
+  viewer: enum(welcome, TaskEditor, TaskViewer,
+               TaskListViewer, UserEditor, UsersViewer)
+}
+</pre>
+<p>To view all users, application should be in <u>UsersViewer</u> substate to show table in <b>Desktop</b>.</p>
+<center><img src="images/users_viewer.png" width="592" height="335"></center>
+<p>This <b>UsersViewer</b> object contains <b>UsersTable</b> object which shows whole list of users. <b>UsersTable</b> has <b>UsersTableHeaderSorter</b> object. It's a row of clickable buttons to sort columns. <b>UsersTable</b> has personal state to represent data:</p>
+<pre>
+{
+  sortColumn: enum(firstname, lastname, email, manager, role)
+  sortDirection: enum(up, down)
+}
+</pre>
+<p>Clicking on a row will lead to <b>UserEditor</b> form by changing state <b>viewer</b> to <u>UserEditor</u> with prefilled fields of clicked row. Same thing will happen if user will click "New user" button in <b>Top</b> object, but all fields will be empty.</p>
+<center><img src="images/user_editor.png" width="366" height="252"></center>
+<p>There is <b>InputCombo</b> object which contains all users to select as a manager. If choosen user himself, no one else can assign tasks for him. "Cancel" button leads to <b>UsersViewer</b> without saving. "Save" button leads to <b>UsersViewer</b> too, but validates and saves data first. If data is not valid, just bad fields will be indicated. Here's validation rules:</p>
+<ul>
+	<li>First and last names contains only letters and 1 - 24 symbols.
+	<li>E-mail address... Just validate it without RFC-822! :)
+	<li>Password latin only, length &gt;7, one uppercase, one symbol of !@#$%^&*()|\"'/.,+=-_
+	<li>Password and Re-Password are same ofcourse. :)
+</ul>
+<p>Tasks management has three major components: <b>TaskListViewer</b>, <b>TaskViewer</b> and <b>TaskEditor</b>.</p>
+<center><img src="images/task_list_viewer.png" width="489" height="502"></center>
+<p>This <b>TaskListViewer</b> has filter by doer, priority and by substring in searchbar. Also this component has selector for page size in rows. <b>TaskTableFilter</b>, <b>TaskTableHeaderSorter</b> and <b>TaskTablePager</b> affect state of <b>TaskListViewer</b> component. Here's its state:</p>
+<pre>
+{
+  sortColumn: enum(name, doer, priority, deadline),
+  sortDirection: enum(up, down),
+  doer: 0 or id_user, // 0 - no filter
+  priority: enum(all, low, medium, high, low-medium, medium-high, low-high),
+  substr: string, // filter by substring in task name
+  pageSize: integer, // rows in table
+  page: integer // current page to display
+  totalRows: integer // records in database, used for pager calculation
+}
+</pre>
+<p>To view task details where is <b>TaskViewer</b> component shown below. There is <b>AttachList</b> component which contains links to attached documents related to displayed task. If task has no attaches at all, <b>AttachList</b> component is not shown and even absent in DOM tree. All components here are display information only. There are four buttons inside <b>SetOfButtons</b> component but some buttons will be hidden depends of factors described below.</p>
+<center><img src="images/task_viewer.png" width="345" height="379"></center>
+<p><b>Button</b> "exit" shown always, but <b>Button</b> "Edit" is accessible only for users who has rights to edit. Only persons who created the task (Logged user should be task creator). Doer can close task when it's done, so <b>Button</b> "Close" shown only if task assigned to logged user. Buttons "Close" and "Reopen" cannot be shown together. If task created by manager for doer, and after that doer pressed "Close" button, only manager can see "Reopen" <b>Button</b>. So we can see <b>TaskViewer</b> state:</p>
+<pre>
+{
+  taskMaster: enum(true, false), // Set to true if created by user logged in.
+  doer: enum(true, false), // If task assigned to user logged in.
+  active: enum(true, false), // If task is not complete.
+}
+</pre>
+<p>So here are rules to hide buttons:
+<ul>
+	<li>"Close" <b>Button</b> is hidden when <u>doer</u> is false OR <u>active</u> is false.
+	<li>"Reopen" <b>Button</b> is hidden when <u>taskMaster</u> is false OR <u>active</u> is <u>active</u> is true.
+	<li>"Edit" <b>Button</b> is hidden when <u>taskMaster</u> is false.
+	<li>"Exit" <b>Button</b> is always shown.
+</ul>
+</p>
+<p>To edit task or to create new task there is <b>TaskEditor</b> component. It's almost same as <b>TaskViewer</b> but all fields are editable. <b>InputCombo</b> "Doer" contains inside only subordinated users and additional field "Self" means to assign task to self. This component has no its personal state but properties only. <b>AttachListDeletable</b> contains list of attached files related to task. Same as <b>AttachList</b> but has "Delete" <b>Button</b>. It can be extended from <b>AttachList</b> component.</p>
+<center><img src="images/task_editor.png" width="366" height="502"></center>
+<p><b>Button</b> "Save" does save document on server and returns to <b>TaskListViewer</b>. <b>Button</b> "Cancel" just sends to <b>TaskListViewer</b>. It means that subState <b>viewer</b> of <b>App</b> object sets to <u>TaskListViewer</u>. Button "Clear fields" empties all fields and deletes attaches.</p>
+
+</div>
+</div></div>
+</body>
+</html>
