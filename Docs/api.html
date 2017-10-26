@@ -132,7 +132,7 @@ If token is wrong:
 <h6>Request:</h6>
 <pre>GET /api_v1.0/[token]/tasks/:pageSize/:pageNumber</pre>
 <h6>Response:</h6>
-<p>Server answer is very same as in previous API function, 'Listing tasks'
+<p>Server answer is very same as in previous API function, 'Listing tasks'</p>
 <h5>Get task details</h5>
 <h6>Request:</h6>
 <pre>GET /api_v1.0/[token]/task/:id</pre>
@@ -161,9 +161,11 @@ If token is wrong:
 }
 </pre>
 <p>If user has no rights to access this task or task with given <u>idTask</u> is not exists:</p>
+<pre>
 {
   status: 404
 }
+</pre>
 <h5>Create new task</h5>
 <h6>Request:</h6>
 <pre>POST /api_v1.0/[token]/newtask
@@ -257,6 +259,28 @@ If token is wrong:
 <pre>
 {
   status: 403,
+}
+</pre>
+<h5>Delete attach from task</h5>
+<h6>Request:</h6>
+<pre>DELETE /api_v1.0/[token]/attach/:idTask/:idAttach</pre>
+<h6>Response:</h6>
+<p>If user is task creator, <u>idTask</u> exists and has attach with id <u>idAttach</u>:</p>
+<pre>
+{
+  status: 200
+}
+</pre>
+<p>If user is not task creator:</p>
+<pre>
+{
+  status: 403
+}
+</pre>
+<p>If there is no attach with id <u>idAttach</u> in task with id <u>idTask</u>:</p>
+<pre>
+{
+  status: 404
 }
 </pre>
 <h5>List users</h5>
