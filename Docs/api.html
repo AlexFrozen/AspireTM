@@ -63,6 +63,280 @@ body {
 </div>
 <div class="content">
 <h4><center>REST API documentation</center></h4>
+<p>To use REST API we need token. It is hash generated on server side after login and password are sent. To get token we need authorization, send login and password. Some REST API functinos return <u>status</u> code in response body and it's always same as error code returned by server.</p>
+<h5>Authorization</h5>
+<h6>Request:</h6>
+<pre>POST /api_v1.0/auth
+{
+  login: string,
+  password: string
+}
+</pre>
+<h6>Response:</h6>
+<p>If authorization is succesful:</p>
+<pre>
+{
+  status: 200,
+  token: string
+}
+</pre>
+<p>If authorization is failed:</p>
+<pre>
+{
+  status: 403
+}
+</pre>
+<p>If bad input data format:</p>
+<pre>
+{
+  status: 400
+}
+</pre>
+<h5>Closing session</h5>
+<h6>Request:</h6>
+<pre>GET /api_v1.0/logout</pre>
+<h6>Response:</h6>
+<pre>
+{
+  status: 200
+}
+</pre>
+<h5>Listint tasks</h5>
+<h6>Request:</h6>
+<pre>GET /api_v1.0/[token]/tasks</pre>
+<h6>Response:</h6>
+<pre>
+{
+  status: 200,
+  totalTasks: number,
+  tasksSent: number,
+  tasks: [
+    {
+      idTask: string,
+      name: string,
+      doer: string,
+      priority: enum(High, Medium, Low),
+      deadline: string
+    },
+    ...
+  ]
+}
+</pre>
+If token is wrong:
+<pre>
+{
+  status: 403
+}
+</pre>
+<h5>Listint tasks with paging</h5>
+<h6>Request:</h6>
+<pre>GET /api_v1.0/[token]/tasks/:pageSize/:pageNumber</pre>
+<h6>Response:</h6>
+<p>Server answer is very same as in previous API function, 'Listing tasks'
+<h5>Get task details</h5>
+<h6>Request:</h6>
+<pre>GET /api_v1.0/[token]/task/:id</pre>
+<h6>Response:</h6>
+<p>If user has rights to this task and task with given <u>idTask</u> is exists:</p>
+<pre>
+{
+  status: 200,
+  task: {
+    name: string,
+    doer: string,
+    manager: string,
+    priority: enum(High, Medium, Low),
+    deadline: string,
+    descr: text,
+    attachList: [
+      {
+        idAttach: string,
+        filename: string,
+        url: string,
+        size: string
+      },
+      ...
+    ]
+  }
+}
+</pre>
+<p>If user has no rights to access this task or task with given <u>idTask</u> is not exists:</p>
+{
+  status: 404
+}
+<h5>Create new task</h5>
+<h6>Request:</h6>
+<pre>POST /api_v1.0/[token]/newtask
+{
+  name: string,
+  idDoer: string,
+  priority: enum(High, Medium, Low),
+  deadline: string,
+  descr: text,
+  attachList: [
+    {
+      idAttach: string,
+      filename: string,
+      url: string,
+      size: string
+    },
+    ...
+  ]
+}
+</pre>
+<h6>Response:</h6>
+<p>If everything's fine:</p>
+<pre>
+{
+  status: 200,
+  idTask: string
+}
+</pre>
+<p>If user cannon assign task to given doer:</p>
+<pre>
+{
+  status: 403,
+}
+</pre>
+<p>If there error in JSON input format:</p>
+<pre>
+{
+  status: 400
+}
+</pre>
+<h5>Change task</h5>
+<h6>Request:</h6>
+<pre>PUT /api_v1.0/[token]/task/:id
+{
+  name: string,
+  idDoer: string,
+  priority: enum(High, Medium, Low),
+  deadline: string,
+  descr: text,
+  attachList: [
+    {
+      idAttach: string,
+      filename: string,
+      url: string,
+      size: string
+    },
+    ...
+  ]
+}
+</pre>
+<h6>Response:</h6>
+<p>If task is updated:</p>
+<pre>
+{
+  status: 200,
+}
+</pre>
+<p>If user cannon assign task to given doer:</p>
+<pre>
+{ 
+  status: 403,
+}
+</pre>
+<p>If there error in JSON input format:</p>
+<pre>
+{
+  status: 400
+}
+</pre>
+<h5>Delete task</h5>
+<h6>Request:</h6>
+<pre>DELETE /api_v1.0/[token]/task/:id</pre>
+<h6>Response:</h6>
+<p>If user is task creator and given <u>idTask</u> is exists:</p>
+<pre>
+{ 
+  status: 200,
+}
+</pre>
+<p>Otherwise:</p>
+<pre>
+{
+  status: 403,
+}
+</pre>
+<h5>List users</h5>
+<h6>Request:</h6>
+<pre>GET /api_v1.0/[token]/users</pre>
+<h6>Response:</h6>
+<p>If user has 'Admin' role:</p>
+<pre>
+{
+  status: 200,
+  users: [
+    {
+      idUser: string,
+      firstName: string,
+      lastName: string,
+      eMail: string,
+      manager: string,
+      role: string
+    },
+    ...
+  ]
+}
+</pre>
+<p>If user has no 'Admin' role:</p>
+<pre>
+{
+  status: 403
+}
+</pre>
+<h5>Add user</h5>
+<h6>Request:</h6>
+<pre>POST /api_v1.0/[token]/newuser
+{
+  firstName: string,
+  lastName: string,
+  eMail: string,
+  manager: string,
+  role: string,
+  password: string
+}
+</pre>
+<h6>Response:</h6>
+<p>If user has 'Admin' role:</p>
+<pre>
+{
+  status: 200,
+  idUser: string
+}
+</pre>
+<p>Otherwise:</p>
+<pre>
+{
+  status: 403
+}
+</pre>
+<h5>Alter user</h5>
+<h6>Request:</h6>
+<pre>PUT /api_v1.0/[token]/user/:id
+{
+  firstName: string,
+  lastName: string,
+  eMail: string,
+  manager: string,
+  role: string,
+  password: string
+}
+</pre>
+<h6>Response:</h6>
+<p>If user has 'Admin' role:</p>
+<pre>
+{
+  status: 200,
+}
+</pre>
+<p>Otherwise:</p>
+<pre>
+{
+  status: 403
+}
+</pre>
 </div>
 
 </div></div>
