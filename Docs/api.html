@@ -77,6 +77,7 @@ body {
 <pre>
 {
   status: 200,
+  idUser: string,
   token: string
 }
 </pre>
@@ -101,7 +102,7 @@ body {
   status: 200
 }
 </pre>
-<h5>Listint tasks</h5>
+<h5>Listing tasks</h5>
 <h6>Request:</h6>
 <pre>GET /api_v1.0/[token]/tasks</pre>
 <h6>Response:</h6>
@@ -128,7 +129,7 @@ If token is wrong:
   status: 403
 }
 </pre>
-<h5>Listint tasks with paging</h5>
+<h5>Listing tasks with paging</h5>
 <h6>Request:</h6>
 <pre>GET /api_v1.0/[token]/tasks/:pageSize/:pageNumber</pre>
 <h6>Response:</h6>
@@ -137,13 +138,15 @@ If token is wrong:
 <h6>Request:</h6>
 <pre>GET /api_v1.0/[token]/task/:id</pre>
 <h6>Response:</h6>
-<p>If user has rights to this task and task with given <u>idTask</u> is exists:</p>
+<p>If user has rights to this task and task with given <u>idTask</u> exists:</p>
 <pre>
 {
   status: 200,
   task: {
     name: string,
+    idDoer: string,
     doer: string,
+    idManager: string,
     manager: string,
     priority: enum(High, Medium, Low),
     deadline: string,
@@ -310,6 +313,25 @@ If token is wrong:
   status: 403
 }
 </pre>
+<h5>List accessible doers</h5>
+List of users managed by user logged in.
+<h6>Request:</h6>
+<pre>GET /api_v1.0/[token]/doers</pre>
+<h6>Response:</h6>
+<pre>
+{
+  status: 200,
+  users: [
+    {
+      idUser: string,
+      firstName: string,
+      lastName: string
+    },
+    ...
+  ]
+}
+</pre>
+<p>Returned array may be empty.</p>
 <h5>Add user</h5>
 <h6>Request:</h6>
 <pre>POST /api_v1.0/[token]/newuser
