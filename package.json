@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
+    "init": "node initdb.js",
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,8 +25,10 @@
   },
   "homepage": "https://github.com/AlexFrozen/aspire-task-manager#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "4.16",
     "mongodb": "^2.2.33",
+    "mongoose": "^4.12.4",
     "react": "16",
     "react-dom": "16"
   },
