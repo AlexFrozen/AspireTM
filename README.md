@@ -40,6 +40,9 @@ aspire-task-manager/
     *.html
   src/                 Source code folder
     api/               REST API
+      mongodb-client/  Native MongoDB driver
+        index.js       Collection of API functions interacting with DB
+        *.js           API functions, one per file
     spapp/             SPA components
       *.jsx
       *.css
