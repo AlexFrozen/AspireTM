@@ -50,7 +50,28 @@ body {
 	padding: 10px;
 	font-size: 14px;
 }
+.hidden {
+	visibility: hidden;
+	display: none;
+}
+h5 {
+	background-color: #88FF88;
+	cursor: pointer;
+	text-decoration: underline;
+}
 </style>
+<script>
+function toggle_fold(e) {
+	var c = e.nextSibling;
+	if (c.style.visibility ==='hidden' || c.style.visibility === '') {
+		c.style.visibility = 'visible';
+		c.style.display = 'block'
+	}else{
+		c.style.visibility = 'hidden';
+		c.style.display = 'none'
+	}
+}
+</script>
 </head>
 <body>
 <div class="wrap"><div class="body">
@@ -64,7 +85,7 @@ body {
 <div class="content">
 <h4><center>REST API documentation</center></h4>
 <p>To use REST API we need token. It is hash generated on server side after login and password are sent. To get token we need authorization, send login and password. Some REST API functinos return <u>status</u> code in response body and it's always same as error code returned by server.</p>
-<h5>Authorization</h5>
+<h5 onclick="toggle_fold(this)">Authorization</h5><div class="hidden">
 <h6>Request:</h6>
 <pre>POST /api_v1.0/auth
 {
@@ -92,17 +113,24 @@ body {
 {
   status: 400
 }
-</pre>
-<h5>Closing session</h5>
+</pre></div>
+<h5 onclick="toggle_fold(this)">Closing session</h5><div class="hidden">
 <h6>Request:</h6>
-<pre>GET /api_v1.0/logout</pre>
+<pre>GET /api_v1.0/[token]/logout</pre>
 <h6>Response:</h6>
+<p>If everithing fine:</p>
 <pre>
 {
   status: 200
 }
 </pre>
-<h5>Listing tasks</h5>
+<p>If token does not exists:</p>
+<pre>
+{
+  status: 404
+}
+</pre></div>
+<h5 onclick="toggle_fold(this)">Listing tasks</h5><div class="hidden">
 <h6>Request:</h6>
 <pre>GET /api_v1.0/[token]/tasks</pre>
 <h6>Response:</h6>
@@ -128,13 +156,13 @@ If token is wrong:
 {
   status: 403
 }
-</pre>
-<h5>Listing tasks with paging</h5>
+</pre></div>
+<h5 onclick="toggle_fold(this)">Listing tasks with paging</h5><div class="hidden">
 <h6>Request:</h6>
 <pre>GET /api_v1.0/[token]/tasks/:pageSize/:pageNumber</pre>
 <h6>Response:</h6>
-<p>Server answer is very same as in previous API function, 'Listing tasks'</p>
-<h5>Get task details</h5>
+<p>Server answer is very same as in previous API function, 'Listing tasks'</p></div>
+<h5 onclick="toggle_fold(this)">Get task details</h5><div class="hidden">
 <h6>Request:</h6>
 <pre>GET /api_v1.0/[token]/task/:id</pre>
 <h6>Response:</h6>
@@ -168,8 +196,8 @@ If token is wrong:
 {
   status: 404
 }
-</pre>
-<h5>Create new task</h5>
+</pre></div>
+<h5 onclick="toggle_fold(this)">Create new task</h5><div class="hidden">
 <h6>Request:</h6>
 <pre>POST /api_v1.0/[token]/newtask
 {
@@ -208,8 +236,8 @@ If token is wrong:
 {
   status: 400
 }
-</pre>
-<h5>Change task</h5>
+</pre></div>
+<h5 onclick="toggle_fold(this)">Change task</h5><div class="hidden">
 <h6>Request:</h6>
 <pre>PUT /api_v1.0/[token]/task/:id
 {
@@ -247,8 +275,8 @@ If token is wrong:
 {
   status: 400
 }
-</pre>
-<h5>Delete task</h5>
+</pre></div>
+<h5 onclick="toggle_fold(this)">Delete task</h5><div class="hidden">
 <h6>Request:</h6>
 <pre>DELETE /api_v1.0/[token]/task/:id</pre>
 <h6>Response:</h6>
@@ -263,8 +291,8 @@ If token is wrong:
 {
   status: 403,
 }
-</pre>
-<h5>Delete attach from task</h5>
+</pre></div>
+<h5 onclick="toggle_fold(this)">Delete attach from task</h5><div class="hidden">
 <h6>Request:</h6>
 <pre>DELETE /api_v1.0/[token]/attach/:idTask/:idAttach</pre>
 <h6>Response:</h6>
@@ -285,8 +313,8 @@ If token is wrong:
 {
   status: 404
 }
-</pre>
-<h5>List users</h5>
+</pre></div>
+<h5 onclick="toggle_fold(this)">List users</h5><div class="hidden">
 <h6>Request:</h6>
 <pre>GET /api_v1.0/[token]/users</pre>
 <h6>Response:</h6>
@@ -307,13 +335,13 @@ If token is wrong:
   ]
 }
 </pre>
-<p>If user has no 'Admin' role:</p>
+<p>If user has no 'Admin' role or token is wrong:</p>
 <pre>
 {
   status: 403
 }
-</pre>
-<h5>List accessible doers</h5>
+</pre></div>
+<h5 onclick="toggle_fold(this)">List accessible doers</h5><div class="hidden">
 List of users managed by user logged in.
 <h6>Request:</h6>
 <pre>GET /api_v1.0/[token]/doers</pre>
@@ -331,34 +359,48 @@ List of users managed by user logged in.
   ]
 }
 </pre>
-<p>Returned array may be empty.</p>
-<h5>Add user</h5>
+<p>Returned array may be empty.</p></div>
+<h5 onclick="toggle_fold(this)">Add user</h5><div class="hidden">
 <h6>Request:</h6>
 <pre>POST /api_v1.0/[token]/newuser
 {
   firstName: string,
   lastName: string,
   eMail: string,
-  manager: string,
+  idManager: string,
   role: string,
   password: string
 }
 </pre>
+<p>If user has no manager, idManager should be '0'. Role should be enum(Admin, User).</p>
 <h6>Response:</h6>
-<p>If user has 'Admin' role:</p>
+<p>If user has no 'Admin' role:</p>
+<pre>
+{
+  status: 403
+}
+</pre>
+<p>If idManager does not exists:</p>
+<pre>
+{
+  status: 422
+}
+</pre>
+<p>If eMail is already exists:</p>
+<pre>
+{
+  status: 409
+}
+</pre>
+<p>If everithing's fine:</p>
 <pre>
 {
   status: 200,
   idUser: string
 }
 </pre>
-<p>Otherwise:</p>
-<pre>
-{
-  status: 403
-}
-</pre>
-<h5>Alter user</h5>
+</div>
+<h5 onclick="toggle_fold(this)">Alter user</h5><div class="hidden">
 <h6>Request:</h6>
 <pre>PUT /api_v1.0/[token]/user/:id
 {
@@ -382,7 +424,7 @@ List of users managed by user logged in.
 {
   status: 403
 }
-</pre>
+</pre></div>
 </div>
 
 </div></div>
