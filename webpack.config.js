@@ -2,10 +2,19 @@ var nodeExternals = require('webpack-node-externals');
 
 module.exports = [
   {
-    entry: './index.js',
+    entry: './src/index.js',
     output:  {
       path: __dirname,
       filename: 'server.js'
+    },
+    target: 'node',
+    externals: nodeExternals()
+  },
+  {
+    entry: './src/init.js',
+    output:  {
+      path: __dirname,
+      filename: 'initdb.js'
     },
     target: 'node',
     externals: nodeExternals()
