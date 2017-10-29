@@ -25,11 +25,19 @@ MongoClient.connect('mongodb://localhost:27017/aspire-tm', (err, db) => {
     dbapi.logout(req, res, db)
   })
 
+  server.post('/api_v1.0/:token/newtask', (req, res) => {
+    dbapi.newtask(req, res, db)
+  })
+
   server.get('/api_v1.0/:token/users', (req, res) => {
     dbapi.users(req, res, db)
   })
 
-  server.post('/api_v1.0/newuser', (req, res) => {
+  server.get('/api_v1.0/:token/doers', (req, res) => {
+    dbapi.doers(req, res, db)
+  })
+
+  server.post('/api_v1.0/:token/newuser', (req, res) => {
     dbapi.addUser(req, res, db)
   })
 
