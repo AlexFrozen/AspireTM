@@ -217,6 +217,7 @@ If token is wrong:
   ]
 }
 </pre>
+<p><u>attachList</u> may absent in query if no attaches for submitted task. If <u>idDoer</u> is '0', task created for user logged in</p>
 <h6>Response:</h6>
 <p>If everything's fine:</p>
 <pre>
@@ -228,7 +229,13 @@ If token is wrong:
 <p>If user cannon assign task to given doer:</p>
 <pre>
 {
-  status: 403,
+  status: 422
+}
+</pre>
+<p>If user is not authenticated:</p>
+<pre>
+{
+  status: 403
 }
 </pre>
 <p>If there error in JSON input format:</p>
