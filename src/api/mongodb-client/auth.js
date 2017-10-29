@@ -31,6 +31,7 @@ function auth (req, res, db) {
           {
             token: token,
             idUser: idUser,
+            fullName: r.firstName+' '+r.lastName,
             role: r.role
           }, (err, r) => {
             if (err || r.insertedCount != 1) {
