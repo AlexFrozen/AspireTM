@@ -29,6 +29,10 @@ MongoClient.connect('mongodb://localhost:27017/aspire-tm', (err, db) => {
     dbapi.newtask(req, res, db)
   })
 
+  server.get('/api_v1.0/:token/tasks', (req, res) => {
+    dbapi.tasks(req, res, db)
+  })
+
   server.get('/api_v1.0/:token/users', (req, res) => {
     dbapi.users(req, res, db)
   })
