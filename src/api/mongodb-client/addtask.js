@@ -39,12 +39,15 @@ function createTask (req, res, db) {
           }
         }
         if (req.body.idDoer === '0') {
-          doc.idDoer = idManager
+          doc.doer = {
+            id: idManager,
+            fullName: r.fullName
+          }
           doc.manager.fullName = 'Self'
           insertTask(res, Tasks, doc)
         }else{
           const idDoer = new ObjectID(req.body.idDoer)
-          doc.idDoer = idDoer
+          doc.doer = { id: idDoer }
           doc.manager.fullName = r.fullName
           Users.findOne(
             {
@@ -55,6 +58,7 @@ function createTask (req, res, db) {
                 answer.status = 500
                 res.status(answer.status).json(answer)
               }else if (r){
+                doc.doer.fullName = r.firstName+' '+r.lastName
                 insertTask (res, Tasks, doc)
               }else{
                 answer.status = 422
