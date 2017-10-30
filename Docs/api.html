@@ -132,13 +132,33 @@ function toggle_fold(e) {
 </pre></div>
 <h5 onclick="toggle_fold(this)">Listing tasks</h5><div class="hidden">
 <h6>Request:</h6>
-<pre>GET /api_v1.0/[token]/tasks</pre>
+<pre>GET /api_v1.0/[token]/tasks
+pagesize: number, default 10, not more 100
+pagenum: number, default 1, not less than 1
+sort: enum(name, doer, priority, deadline), default is 'name'
+order: enum(asc, desc), default is 'asc'
+filter[doer]: id of doer to filter
+filter[priority]: enum(High, Medium, Low)
+filter[search]: substring to search name, case incensitive
+</pre>
 <h6>Response:</h6>
 <pre>
 {
   status: 200,
   totalTasks: number,
+  tasksSkipped: number,
   tasksSent: number,
+  sort:
+  {
+    field: enum(name, doer, priority, deadline)
+    order: enum(asc, desc)
+  }
+  filter:
+  {
+    doer: idDoer,
+    priority: enum(High, Medium, Low),
+    search: string
+  }
   tasks: [
     {
       idTask: string,
@@ -150,6 +170,7 @@ function toggle_fold(e) {
     ...
   ]
 }
+<p><u>filter</u> may be absent if no filter was applied. Fields in filter may be absent if not applied. If no tasks to send, there are no empty <u>tasks</u> array in answer.
 </pre>
 If token is wrong:
 <pre>
@@ -157,11 +178,6 @@ If token is wrong:
   status: 403
 }
 </pre></div>
-<h5 onclick="toggle_fold(this)">Listing tasks with paging</h5><div class="hidden">
-<h6>Request:</h6>
-<pre>GET /api_v1.0/[token]/tasks/:pageSize/:pageNumber</pre>
-<h6>Response:</h6>
-<p>Server answer is very same as in previous API function, 'Listing tasks'</p></div>
 <h5 onclick="toggle_fold(this)">Get task details</h5><div class="hidden">
 <h6>Request:</h6>
 <pre>GET /api_v1.0/[token]/task/:id</pre>
