@@ -47,7 +47,7 @@ function listTasks (req, res, db) {
           if ('doer' in req.query.filter) {
             query['doer.id'] = new ObjectID(req.query.filter.doer)
           }
-          // FIXME doublw priorities like Low-Medium
+          // FIXME double priorities like Low-Medium
           if ('priority' in req.query.filter ) {
             query.priority = req.query.filter.priority
           }
@@ -66,19 +66,35 @@ function listTasks (req, res, db) {
           }else{
             const order = {}
             let sortDir = 1
+            let orderField = ''
             if ('order' in req.query && req.query.order === 'desc') {
               sortDir = -1
             }
             if ('sort' in req.query) {
-              switch (req.query) {
-                case 'name': order.name = sortDir; break
-                case 'doer': order.doer = { fullName: sortDir }; break
-                case 'priority': order.priority = sortDir; break
-                case 'deadline': order.deadline = sortDir; break
-                default: order.name = sortDir
+              switch (req.query.sort) {
+                case 'name':
+                  orderField = req.query.sort
+                  order.name = sortDir
+                  break
+                case 'doer':
+                  orderField = req.query.sort
+                  order['doer.fullName'] = sortDir
+                  break
+                case 'priority':
+                  orderField = req.query.sort
+                  order.priority = sortDir
+                  break
+                case 'deadline':
+                  orderField = req.query.sort
+                  order.deadline = sortDir
+                  break
+                default:
+                  order.name = sortDir
+                  orderField = 'name'
               }
             }else{
-                order.name = sortDir
+              orderField = 'name'
+              order.name = sortDir
             }
             const tasklist = []
             Tasks.find(query).sort(order)
@@ -98,6 +114,25 @@ function listTasks (req, res, db) {
                 })
               }else{
                 answer.status = 200
+                answer.totalTasks = count
+                answer.tasksSkipped = pagesize*pagenum
+                answer.tasksSent = tasklist.length
+                answer.sort = {
+                  field: orderField,
+                  order: sortDir == -1 ? 'desc' : 'asc'
+                }
+                if ('filter' in req.query) {
+                  answer.filter = {}
+                  if ('doer.id' in query) {
+                    answer.filter.doer = query['doer.id']
+                  }
+                  if ('priority' in query ) {
+                    answer.filter.priority = query.priority
+                  }
+                  if ('name' in query ) {
+                    answer.filter.search = query.name.$regex
+                  }
+                }
                 answer.tasks = tasklist
                 res.status(answer.status).json(answer)
               }
