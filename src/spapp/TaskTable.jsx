@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { TaskTableHeaderSorter } from './TaskTableHeaderSorter.jsx'
 import { TableRow } from './TableRow.jsx'
-import './TaskTable.css'
+import './TaskTable.less'
 
 class TaskTable extends Component {
   constructor(props) {
@@ -27,7 +27,10 @@ class TaskTable extends Component {
     return (
       <table border="1">
         <thead>
-          <TaskTableHeaderSorter />
+          <TaskTableHeaderSorter
+            col={this.props.col}
+            dir={this.props.dir}
+          />
         </thead>
         <tbody>
           {rows}
