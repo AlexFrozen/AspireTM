@@ -60,6 +60,8 @@ class Top extends Component {
           authorized={this.props.authorized}
           firstName={this.props.firstName}
           lastName={this.props.lastName}
+          didLogin={this.props.didLogin}
+          didLogout={this.props.didLogout}
         />
       </div>
     )
