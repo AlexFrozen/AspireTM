@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { SetOfButtons } from './SetOfButtons.jsx'
 import { Auth } from './Auth.jsx'
-import './Top.css'
+import './Top.less'
 
 class Top extends Component {
   constructor(props) {
@@ -23,14 +23,14 @@ class Top extends Component {
     if (this.props.user.authorized) {
       if (this.props.viewer !== 'TaskEditor') buttons.push(
         {
-          className: 'Top-new-task-button',
+          className: 'Menu-button',
           caption: 'New task',
           onClick: this.setTaskEditor
         }
       )
       if (this.props.viewer !== 'TaskListViewer') buttons.push(
         {
-          className: 'Top-task-list-button',
+          className: 'Menu-button',
           caption: 'Task list',
           onClick: this.setTaskListViewer
         }
@@ -38,14 +38,14 @@ class Top extends Component {
       if (this.props.user.isAdmin) {
         if (this.props.viewer !== 'UserEditor') buttons.push(
           {
-          className: 'Top-user-editor-button',
+            className: 'Menu-button',
             caption: 'New user',
             onClick: this.setUserEditor
           }
         )
         if (this.props.viewer !== 'UsersViewer') buttons.push(
           {
-          className: 'Top-user-viewer-button',
+            className: 'Menu-button',
             caption: 'Users',
             onClick: this.setUsersViewer
           }
@@ -56,7 +56,7 @@ class Top extends Component {
     return (
       <div className='Top'>
         {toolbar}
-        <Auth className='Auth' {...this.props.user} />
+        <Auth {...this.props.user} />
       </div>
     )
   }
