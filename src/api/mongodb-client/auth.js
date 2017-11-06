@@ -23,6 +23,8 @@ function auth (req, res, db) {
         return
       }else if (r){
         const idUser = r._id
+        const firstName = r.firstName
+        const lastName = r.lastName
         const token = crypto.createHash('sha256')
                        .update(r._id+req.ip+Math.random()+'hash59388634')
                        .digest('hex')
@@ -31,7 +33,7 @@ function auth (req, res, db) {
           {
             token: token,
             idUser: idUser,
-            fullName: r.firstName+' '+r.lastName,
+            fullName: firstName+' '+lastName,
             role: r.role
           }, (err, r) => {
             if (err || r.insertedCount != 1) {
@@ -39,6 +41,8 @@ function auth (req, res, db) {
             }else{
               answer.status = 200
               answer.idUser = idUser
+              answer.firstName = firstName
+              answer.lastName = lastName
               answer.token = token
             }
             res.status(answer.status).json(answer)
