@@ -10,7 +10,7 @@ class App extends Component {
       viewer: 'welcome',
       authorized: false,
     }
-    this.credentials: {
+    this.credentials = {
       firstName: '',
       lastName: '',
       eMail: '',
