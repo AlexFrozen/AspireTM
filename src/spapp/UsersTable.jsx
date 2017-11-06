@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { UsersTableHeaderSorter } from './UsersTableHeaderSorter.jsx'
 import { TableRow } from './TableRow.jsx'
-import './UsersTable.css'
+import './UsersTable.less'
 
 class UsersTable extends Component {
   render() {

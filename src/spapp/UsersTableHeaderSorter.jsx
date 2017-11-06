@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button } from './Button.jsx'
-import './UsersTableHeaderSorter.css'
+import './UsersTableHeaderSorter.less'
 
 class UsersTableHeaderSorter extends Component {
   render() {
