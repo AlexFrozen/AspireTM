@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Button } from './Button.jsx'
-import './TaskTablePager.css'
+import './TaskTablePager.less'
 
 class TaskTablePager extends Component {
   render() {
