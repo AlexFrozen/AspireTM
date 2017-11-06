@@ -4,7 +4,7 @@ import { TaskViewer } from './TaskViewer.jsx'
 import { UserEditor } from './UserEditor.jsx'
 import { UsersViewer } from './UsersViewer.jsx'
 import { TaskListViewer } from './TaskListViewer.jsx'
-import './Desktop.css'
+import './Desktop.less'
 
 class Desktop extends Component {
   render() {
