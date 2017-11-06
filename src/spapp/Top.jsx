@@ -20,7 +20,7 @@ class Top extends Component {
   render() {
     const buttons = []
     let toolbar = ''
-    if (this.props.user.authorized) {
+    if (this.props.authorized) {
       if (this.props.viewer !== 'TaskEditor') buttons.push(
         {
           className: 'Menu-button',
@@ -35,7 +35,7 @@ class Top extends Component {
           onClick: this.setTaskListViewer
         }
       )
-      if (this.props.user.isAdmin) {
+      if (this.props.isAdmin) {
         if (this.props.viewer !== 'UserEditor') buttons.push(
           {
             className: 'Menu-button',
@@ -56,7 +56,11 @@ class Top extends Component {
     return (
       <div className='Top'>
         {toolbar}
-        <Auth {...this.props.user} />
+        <Auth
+          authorized={this.props.authorized}
+          firstName={this.props.firstName}
+          lastName={this.props.lastName}
+        />
       </div>
     )
   }
