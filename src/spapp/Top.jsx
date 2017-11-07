@@ -57,6 +57,8 @@ class Top extends Component {
       <div className='Top'>
         {toolbar}
         <Auth
+          apiUrl={this.props.apiUrl}
+          token={this.props.token}
           authorized={this.props.authorized}
           firstName={this.props.firstName}
           lastName={this.props.lastName}

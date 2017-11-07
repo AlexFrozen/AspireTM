@@ -48,6 +48,8 @@ class App extends Component {
     return (
       <div className='App-body'><div className='App-ribbon'>
         <Top
+          apiUrl={this.props.apiUrl}
+          token={this.credentials.token}
           authorized={this.state.authorized}
           isAdmin={this.credentials.isAdmin}
           firstName={this.credentials.firstName}
