@@ -13,7 +13,7 @@ const dbapi = {
   tasks: listTasks,
   users: users,
   addUser: addUser,
-  doers: doers
+  doers: doers,
 }
 
 export { dbapi }
