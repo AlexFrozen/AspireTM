@@ -2,20 +2,16 @@ import assert from 'assert'
 import { MongoClient } from 'mongodb'
 import express from 'express'
 import bodyParser from 'body-parser'
-import crypto from 'crypto'
 import { dbapi } from './api/mongodb-client/index.js'
 
 const server = express()
 
-console.log('Connecting to MongoDB server...')
-
 MongoClient.connect('mongodb://localhost:27017/aspire-tm', (err, db) => {
-  assert.equal(null, err);
-  console.log('Connected successfully to MongoDB server');
+  assert.equal(null, err)
 
   server.use('/static', express.static('static'))
 
-  server.use(bodyParser.json());
+  server.use(bodyParser.json())
 
   server.post('/api_v1.0/auth', (req, res) => {
     dbapi.auth(req, res, db)
@@ -45,8 +41,6 @@ MongoClient.connect('mongodb://localhost:27017/aspire-tm', (err, db) => {
     dbapi.addUser(req, res, db)
   })
 
-  console.log('Starting web server on 3000...')
   server.listen(3000)
-  console.log('Listening on 3000')
 })
 
