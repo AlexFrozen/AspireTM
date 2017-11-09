@@ -15,18 +15,18 @@ function auth (req, res, db) {
   Users.findOne({
     eMail: req.body.login,
     password: pass,
-  }, (err, r) => {
-    if (err) {
+  }, (errorFindToken, resToken) => {
+    if (errorFindToken) {
       answer.status = 500
       res.status(answer.status).json(answer)
       return
-    } else if (r) {
-      const idUser = r._id
-      const firstName = r.firstName
-      const lastName = r.lastName
-      const role = r.role
+    } else if (resToken) {
+      const idUser = resToken._id
+      const firstName = resToken.firstName
+      const lastName = resToken.lastName
+      const role = resToken.role
       const token = crypto.createHash('sha256')
-        .update(r._id+req.ip+Math.random()+'hash59388634')
+        .update(resToken._id+req.ip+Math.random()+'hash59388634')
         .digest('hex')
       const Tokens = db.collection('Tokens')
       Tokens.insertOne({
@@ -34,8 +34,8 @@ function auth (req, res, db) {
         idUser: idUser,
         fullName: firstName+' '+lastName,
         role: role,
-      }, (err, r) => {
-        if (err || r.insertedCount != 1) {
+      }, (errorNewToken, resNewToken) => {
+        if (errorNewToken || resNewToken.insertedCount != 1) {
           answer.status = 500
         } else {
           answer.status = 200
