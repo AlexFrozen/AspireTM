@@ -15,8 +15,8 @@ MongoClient.connect(
 
     const col = db.collection('Users')
     col.findOneAndUpdate(
-      {eMail:'admin@no.mail'},
-      {$set: {password:pass}},
+      { eMail: 'admin@no.mail' },
+      { $set: { password: pass } },
       (errorFindAdmin, resAdminFound) => {
         if (resAdminFound.value == null) {
           console.log('Default user is not found, trying to create...')
@@ -33,12 +33,12 @@ MongoClient.connect(
           }, (errorCreateAdmin, createdAdmin) => {
             if (createdAdmin.insertedCount !== 1) {
               console.log("Couldn't create default user. Sorry...")
-            }else{
+            } else {
               console.log(`Created default user ${login} with pass ${pwd}.`)
               console.log("Don't forget to change!")
             }
           })
-        }else{
+        } else {
           console.log(`Password for default user ${login} reset to ${pwd}`)
         }
         db.close()
