@@ -8,11 +8,11 @@ function addUser (req, res, db) {
   Tokens.findOne({
     token: req.params.token,
     role: 'Admin',
-  }, (err, r) => {
-    if (err) {
+  }, (errorFindToken, resToken) => {
+    if (errorFindToken) {
       answer.status = 500
       res.status(answer.status).json(answer)
-    } else if (r) {
+    } else if (resToken) {
       if (
         !('firstName' in req.body)
           || !('lastName' in req.body)
@@ -51,12 +51,12 @@ function addUser (req, res, db) {
         doc.manager.id = new ObjectID(doc.manager.id)
         Users.findOne({
           _id: doc.manager.id,
-        }, (err, r) => {
-          if (err) {
+        }, (errorFindManager, resManager) => {
+          if (errorFindManager) {
             answer.status = 500
             res.status(answer.status).json(answer)
-          } else if (r) {
-            doc.manager.fullName = r.firstName+' '+r.lastName
+          } else if (resManager) {
+            doc.manager.fullName = resManager.firstName+' '+resManager.lastName
             insertUser(res, Users, doc)
           } else {
             answer.status = 422
@@ -75,20 +75,20 @@ function insertUser (res, Users, doc) {
   const answer = {}
   Users.findOne({
     eMail: doc.eMail,
-  }, (err, r) => {
-    if (err) {
+  }, (errorFindByMail, resByMail) => {
+    if (errorFindByMail) {
       answer.status = 500
       res.status(answer.status).json(answer)
-    } else if (r) {
+    } else if (resByMail) {
       answer.status = 409
       res.status(answer.status).json(answer)
     } else {
-      Users.insertOne(doc, (err, r) => {
-        if (err || r.insertedCount != 1) {
+      Users.insertOne(doc, (errorNewUser, resNewUser) => {
+        if (errorNewUser || resNewUser.insertedCount != 1) {
           answer.status = 500
         } else {
           answer.status = 200
-          answer.idUser = r.insertedId
+          answer.idUser = resNewUser.insertedId
         }
         res.status(answer.status).json(answer)
       })
