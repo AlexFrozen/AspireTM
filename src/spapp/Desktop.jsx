@@ -10,7 +10,7 @@ class Desktop extends Component {
   render() {
     let desktop = ''
     switch (this.props.viewer) {
-      case 'welcome':        desktop =
+      case 'welcome': desktop =
         <center>
           <h2>Welcome to Aspire Task Manager</h2>
         </center>; break
