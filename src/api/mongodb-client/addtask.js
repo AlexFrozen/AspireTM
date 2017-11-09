@@ -16,7 +16,7 @@ function createTask (req, res, db) {
           || !('priority' in req.body)
           || !('deadline' in req.body)
           || !('descr' in req.body)
-      ){
+      ) {
         answer.status = 400
         res.status(answer.status).json(answer)
         return
@@ -55,7 +55,7 @@ function createTask (req, res, db) {
           if (errorFindDoer) {
             answer.status = 500
             res.status(answer.status).json(answer)
-          } else if (resDoer){
+          } else if (resDoer) {
             doc.doer.fullName = resDoer.firstName+' '+resDoer.lastName
             insertTask (res, Tasks, doc)
           } else {
