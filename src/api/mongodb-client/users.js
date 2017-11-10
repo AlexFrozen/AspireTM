@@ -4,26 +4,26 @@ function users (req, res, db) {
   Tokens.findOne({
     token: req.params.token,
     role: 'Admin',
-  }, (err, r) => {
-    if (err) {
+  }, (errorFindToken, resToken) => {
+    if (errorFindToken) {
       answer.status = 500
       res.status(answer.status).json(answer)
-    } else if (r) {
+    } else if (resToken) {
       const Users = db.collection('Users')
       const userlist = []
 
-      Users.find({}).each((err, r) => {
-        if (err) {
+      Users.find({}).each((errorUsers, resUser) => {
+        if (errorUsers) {
           answer.status = 500
           res.status(answer.status).json(answer)
-        } else if (r) {
+        } else if (resUser) {
           const user = {}
-          user.idUser = r._id
-          user.firstName = r.firstName
-          user.lastName = r.lastName
-          user.eMail = r.eMail
-          user.manager = r.manager.fullName
-          user.role = r.role
+          user.idUser = resUser._id
+          user.firstName = resUser.firstName
+          user.lastName = resUser.lastName
+          user.eMail = resUser.eMail
+          user.manager = resUser.manager.fullName
+          user.role = resUser.role
           userlist.push(user)
         } else {
           answer.status = 200
