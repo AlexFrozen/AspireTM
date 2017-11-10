@@ -49,20 +49,22 @@ function addUser (req, res, db) {
         insertUser(res, Users, doc)
       } else {
         doc.manager.id = new ObjectID(doc.manager.id)
-        Users.findOne({
-          _id: doc.manager.id,
-        }, (errorFindManager, resManager) => {
-          if (errorFindManager) {
-            answer.status = 500
-            res.status(answer.status).json(answer)
-          } else if (resManager) {
-            doc.manager.fullName = resManager.firstName+' '+resManager.lastName
-            insertUser(res, Users, doc)
-          } else {
-            answer.status = 422
-            res.status(answer.status).json(answer)
+        Users.findOne(
+          { _id: doc.manager.id },
+          (errorFindManager, resManager) => {
+            if (errorFindManager) {
+              answer.status = 500
+              res.status(answer.status).json(answer)
+            } else if (resManager) {
+              doc.manager.fullName = resManager.firstName
+              + ' ' + resManager.lastName
+              insertUser(res, Users, doc)
+            } else {
+              answer.status = 422
+              res.status(answer.status).json(answer)
+            }
           }
-        })
+        )
       }
     } else {
       answer.status = 403
@@ -73,9 +75,7 @@ function addUser (req, res, db) {
 
 function insertUser (res, Users, doc) {
   const answer = {}
-  Users.findOne({
-    eMail: doc.eMail,
-  }, (errorFindByMail, resByMail) => {
+  Users.findOne({ eMail: doc.eMail }, (errorFindByMail, resByMail) => {
     if (errorFindByMail) {
       answer.status = 500
       res.status(answer.status).json(answer)
@@ -95,5 +95,5 @@ function insertUser (res, Users, doc) {
     }
   })
 }
-  
+
 export { addUser }

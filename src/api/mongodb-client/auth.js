@@ -26,13 +26,13 @@ function auth (req, res, db) {
       const lastName = resToken.lastName
       const role = resToken.role
       const token = crypto.createHash('sha256')
-        .update(resToken._id+req.ip+Math.random()+'hash59388634')
+        .update(resToken._id + req.ip + Math.random() + 'hash59388634')
         .digest('hex')
       const Tokens = db.collection('Tokens')
       Tokens.insertOne({
         token: token,
         idUser: idUser,
-        fullName: firstName+' '+lastName,
+        fullName: firstName + ' ' + lastName,
         role: role,
       }, (errorNewToken, resNewToken) => {
         if (errorNewToken || resNewToken.insertedCount != 1) {

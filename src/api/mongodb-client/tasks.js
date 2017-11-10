@@ -16,7 +16,7 @@ function listTasks (req, res, db) {
       answer.status = 400
       res.status(answer.status).json(answer)
       return
-    } else pagesize = 1*req.query.pagesize
+    } else pagesize = 1 * req.query.pagesize
   }
 
   if ('pagenum' in req.query) {
@@ -28,18 +28,16 @@ function listTasks (req, res, db) {
   }
 
   const Tokens = db.collection('Tokens')
-  Tokens.findOne({
-    token: req.params.token,
-  }, (err, r) => {
-    if (err) {
+  Tokens.findOne({ token: req.params.token }, (errorFindToken, resToken) => {
+    if (errorFindToken) {
       answer.status = 500
       res.status(answer.status).json(answer)
-    } else if (r) {
+    } else if (resToken) {
       const Tasks = db.collection('Tasks')
       const query = {
         $or: [
-          { 'doer.id': r.idUser },
-          { 'manager.id': r.idUser },
+          { 'doer.id': resToken.idUser },
+          { 'manager.id': resToken.idUser },
         ],
       }
       if ('filter' in req.query) {
@@ -47,15 +45,15 @@ function listTasks (req, res, db) {
           query['doer.id'] = new ObjectID(req.query.filter.doer)
         }
         // FIXME double priorities like Low-Medium
-        if ('priority' in req.query.filter ) {
+        if ('priority' in req.query.filter) {
           query.priority = req.query.filter.priority
         }
-        if ('search' in req.query.filter ) {
+        if ('search' in req.query.filter) {
           query.name = { $regex: req.query.filter.search, $options: 'i' }
         }
       }
-      Tasks.count(query , (err, count) => {
-        if (err) {
+      Tasks.count(query , (errorTasksCount, count) => {
+        if (errorTasksCount) {
           answer.status = 500
           res.status(answer.status).json(answer)
         } else if (count == 0) {
@@ -97,24 +95,24 @@ function listTasks (req, res, db) {
           }
           const tasklist = []
           Tasks.find(query).sort(order)
-            .skip(pagesize*pagenum)
+            .skip(pagesize * pagenum)
             .limit(pagesize)
-            .each((err, r) => {
-              if (err) {
+            .each((errorFindTasks, resTask) => {
+              if (errorFindTasks) {
                 answer.status = 500
                 res.status(answer.status).json(answer)
-              } else if (r) {
+              } else if (resTask) {
                 tasklist.push({
-                  idTask: r._id,
-                  name: r.name,
-                  doer: r.doer.fullName,
-                  priority: r.priority,
-                  deadline: r.deadline,
+                  idTask: resTask._id,
+                  name: resTask.name,
+                  doer: resTask.doer.fullName,
+                  priority: resTask.priority,
+                  deadline: resTask.deadline,
                 })
               } else {
                 answer.status = 200
                 answer.totalTasks = count
-                answer.tasksSkipped = pagesize*pagenum
+                answer.tasksSkipped = pagesize * pagenum
                 answer.tasksSent = tasklist.length
                 answer.sort = {
                   field: orderField,
@@ -125,10 +123,10 @@ function listTasks (req, res, db) {
                   if ('doer.id' in query) {
                     answer.filter.doer = query['doer.id']
                   }
-                  if ('priority' in query ) {
+                  if ('priority' in query) {
                     answer.filter.priority = query.priority
                   }
-                  if ('name' in query ) {
+                  if ('name' in query) {
                     answer.filter.search = query.name.$regex
                   }
                 }

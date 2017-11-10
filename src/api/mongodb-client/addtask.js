@@ -3,9 +3,7 @@ import { ObjectID } from 'mongodb'
 function createTask (req, res, db) {
   const answer = {}
   const Tokens = db.collection('Tokens')
-  Tokens.findOne({
-    token: req.params.token,
-  }, (errorFindToken, resToken) => {
+  Tokens.findOne({ token: req.params.token }, (errorFindToken, resToken) => {
     if (errorFindToken) {
       answer.status = 500
       res.status(answer.status).json(answer)
@@ -33,9 +31,7 @@ function createTask (req, res, db) {
         priority: req.body.priority,
         deadline: req.body.deadline,
         descr: req.body.descr,
-        manager: {
-          id: idManager,
-        },
+        manager: { id: idManager },
       }
       if (req.body.idDoer === '0') {
         doc.doer = {
@@ -56,8 +52,8 @@ function createTask (req, res, db) {
             answer.status = 500
             res.status(answer.status).json(answer)
           } else if (resDoer) {
-            doc.doer.fullName = resDoer.firstName+' '+resDoer.lastName
-            insertTask (res, Tasks, doc)
+            doc.doer.fullName = resDoer.firstName + ' ' + resDoer.lastName
+            insertTask(res, Tasks, doc)
           } else {
             answer.status = 422
             res.status(answer.status).json(answer)
