@@ -56,8 +56,8 @@ function addUser (req, res, db) {
               answer.status = 500
               res.status(answer.status).json(answer)
             } else if (resManager) {
-              doc.manager.fullName = resManager.firstName
-              + ' ' + resManager.lastName
+              doc.manager.fullName = `${resManager.firstName
+              } ${resManager.lastName}`
               insertUser(res, Users, doc)
             } else {
               answer.status = 422

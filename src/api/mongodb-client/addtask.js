@@ -52,7 +52,7 @@ function createTask (req, res, db) {
             answer.status = 500
             res.status(answer.status).json(answer)
           } else if (resDoer) {
-            doc.doer.fullName = resDoer.firstName + ' ' + resDoer.lastName
+            doc.doer.fullName = `${resDoer.firstName} ${resDoer.lastName}`
             insertTask(res, Tasks, doc)
           } else {
             answer.status = 422
