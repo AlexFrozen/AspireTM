@@ -1,20 +1,93 @@
 {
+  "env": { "node": true },
   "parser": "babel-eslint",
-  "extends": "airbnb",
-//  "extends": "eslint:recommended",
+  "extends": "eslint:recommended",
 //  "plugins": [
 //    "react"
 //  ],
   "rules": {
-    "max-len": [1, 80, 2, {"ignoreComments": false}],
-    "semi": ["error", "never"],
+// ----------- Feel
     "no-console": "warn",
+    "no-undef": "error",
+    "no-eval": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "prefer-template": "error",
+    "no-useless-concat": "error",
+    "eqeqeq": [ "error", "always", { "null": "always" } ],
+    "id-blacklist": [
+      "error",
+      "data",
+      "err",
+      "e",
+      "cb",
+      "eval",
+      "callback"
+    ],
+    "no-unreachable": "error",
+    "no-case-declarations": "error",
+    "no-unexpected-multiline": "error",
+    "space-unary-ops": [
+      "error", {
+          "words": true,
+          "nonwords": false
+       }
+    ],
+    "no-template-curly-in-string": "error",
+    "block-scoped-var": "error",
+    "no-lone-blocks": "error",
+    "curly": "error",
+    "func-style": ["error", "declaration"],
+    "no-array-constructor": "error",
+    "no-multi-assign": "error",
+    "operator-assignment": ["error", "always"],
+    "quote-props": [
+      "error",
+      "as-needed",
+      { "keywords": true }
+    ],
+    "arrow-body-style": ["error", "always"],
+    "constructor-super": "error",
+    "no-confusing-arrow": [
+      "error", { "allowParens": false }
+    ],
+
+// ----------- Look
+    "linebreak-style": ["error", "unix"],
+    "no-mixed-spaces-and-tabs": "error",
+    "no-tabs": "error",
+    "indent": [
+      "error",
+      2, {
+        "SwitchCase": 1,
+        "VariableDeclarator": {
+          "let": 2,
+          "const": 3
+        },
+        "outerIIFEBody": 1,
+        "MemberExpression": 0,
+        "FunctionDeclaration": {"body": 1, "parameters": "first"},
+        "FunctionExpression": {"body": 1, "parameters": "first"},
+        "CallExpression": {"arguments": "first"},
+        "ArrayExpression": 1,
+        "ObjectExpression": 1,
+        "ImportDeclaration": 1,
+        "flatTernaryExpressions": false
+      }
+    ],
+    "max-len": [1, 80, 2, {"ignoreComments": false}],
+    "no-trailing-spaces": "error",
+    "semi": ["error", "never"],
+    "semi-spacing": ["error", {"before": false, "after": true}],
+    "comma-spacing": ["error", { "before": false, "after": true }],
+    "comma-style": ["error", "last"],
+    "no-extra-parens": ["error", "all"],
+    "func-call-spacing": ["error", "never"],
     "function-paren-newline": ["error", "multiline"],
     "quotes": ["error", "single", { "avoidEscape": true }],
-    "comma-dangle":
-    [
-      "error",
-      {
+    "space-infix-ops": "error",
+    "comma-dangle": [
+      "error", {
         "arrays": "always-multiline",
         "objects": "always-multiline",
         "imports": "never",
@@ -22,17 +95,35 @@
         "functions": "never"
       }
     ],
-    "no-shadow":
-    [
-      "error",
-      {
+    "no-shadow": [
+      "error", {
         "builtinGlobals": false,
         "hoist": "functions",
         "allow": []
       }
     ],
-    "object-curly-spacing": "error",
+    "space-in-parens": ["error", "never"],
+    "switch-colon-spacing": ["error", {"after": true, "before": false}],
+    "object-curly-newline": ["error", {"multiline": true}],
+    "object-curly-spacing": ["error", "always"],
+    "object-property-newline": [
+      "error",
+      { "allowMultiplePropertiesPerLine": true }
+    ],
+    "space-before-blocks": ["error", "always"],
+    "block-spacing": ["error", "always"],
+    "padded-blocks": ["error", "never"],
+    "brace-style": ["error", "1tbs"],
     "keyword-spacing": "error",
-    "key-spacing": "error"
+    "key-spacing": "error",
+    "dot-location": ["error", "property"],
+    "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
+    "operator-linebreak": ["error", "before"],
+    "arrow-spacing": [
+      "error", {
+        "before": true,
+        "after": true
+      }
+    ]
   }
 }
