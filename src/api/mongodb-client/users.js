@@ -31,7 +31,6 @@ function users (req, res, db) {
           res.status(answer.status).json(answer)
         }
       })
-
     } else {
       answer.status = 403
       res.status(answer.status).json(answer)
