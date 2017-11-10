@@ -49,6 +49,7 @@
       "error", { "allowParens": false }
     ],
 // ----------- Look
+    "eol-last": ["error", "always"],
     "linebreak-style": ["error", "unix"],
     "no-mixed-spaces-and-tabs": "error",
     "no-tabs": "error",
