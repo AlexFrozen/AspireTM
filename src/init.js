@@ -5,7 +5,10 @@ import crypto from 'crypto'
 
 const login = 'admin@no.mail'
 const pwd = 'admin'
-const pass = crypto.createHash('sha256').update(pwd).digest('hex')
+const pass = crypto
+.createHash('sha256')
+.update(pwd)
+.digest('hex')
 
 MongoClient.connect(
   'mongodb://localhost:27017/aspire-tm',

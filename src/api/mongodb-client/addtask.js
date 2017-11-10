@@ -70,7 +70,7 @@ function createTask (req, res, db) {
 function insertTask (res, Tasks, doc) {
   const answer = {}
   Tasks.insertOne(doc, (errorCreateTask, resTaskCreated) => {
-    if (errorCreateTask || resTaskCreated.insertedCount != 1) {
+    if (errorCreateTask || resTaskCreated.insertedCount !== 1) {
       answer.status = 500
     } else {
       answer.status = 200

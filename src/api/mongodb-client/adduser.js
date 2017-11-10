@@ -84,7 +84,7 @@ function insertUser (res, Users, doc) {
       res.status(answer.status).json(answer)
     } else {
       Users.insertOne(doc, (errorNewUser, resNewUser) => {
-        if (errorNewUser || resNewUser.insertedCount != 1) {
+        if (errorNewUser || resNewUser.insertedCount !== 1) {
           answer.status = 500
         } else {
           answer.status = 200

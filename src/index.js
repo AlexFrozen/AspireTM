@@ -6,41 +6,44 @@ import { dbapi } from './api/mongodb-client/index.js'
 
 const server = express()
 
-MongoClient.connect('mongodb://localhost:27017/aspire-tm', (err, db) => {
-  assert.equal(null, err)
+MongoClient.connect(
+  'mongodb://localhost:27017/aspire-tm',
+  (errorConnectDB, db) => {
+    assert.equal(null, errorConnectDB)
 
-  server.use('/static', express.static('static'))
+    server.use('/static', express.static('static'))
 
-  server.use(bodyParser.json())
+    server.use(bodyParser.json())
 
-  server.post('/api_v1.0/auth', (req, res) => {
-    dbapi.auth(req, res, db)
-  })
+    server.post('/api_v1.0/auth', (req, res) => {
+      dbapi.auth(req, res, db)
+    })
 
-  server.get('/api_v1.0/:token/logout', (req, res) => {
-    dbapi.logout(req, res, db)
-  })
+    server.get('/api_v1.0/:token/logout', (req, res) => {
+      dbapi.logout(req, res, db)
+    })
 
-  server.post('/api_v1.0/:token/newtask', (req, res) => {
-    dbapi.newtask(req, res, db)
-  })
+    server.post('/api_v1.0/:token/newtask', (req, res) => {
+      dbapi.newtask(req, res, db)
+    })
 
-  server.get('/api_v1.0/:token/tasks', (req, res) => {
-    dbapi.tasks(req, res, db)
-  })
+    server.get('/api_v1.0/:token/tasks', (req, res) => {
+      dbapi.tasks(req, res, db)
+    })
 
-  server.get('/api_v1.0/:token/users', (req, res) => {
-    dbapi.users(req, res, db)
-  })
+    server.get('/api_v1.0/:token/users', (req, res) => {
+      dbapi.users(req, res, db)
+    })
 
-  server.get('/api_v1.0/:token/doers', (req, res) => {
-    dbapi.doers(req, res, db)
-  })
+    server.get('/api_v1.0/:token/doers', (req, res) => {
+      dbapi.doers(req, res, db)
+    })
 
-  server.post('/api_v1.0/:token/newuser', (req, res) => {
-    dbapi.addUser(req, res, db)
-  })
+    server.post('/api_v1.0/:token/newuser', (req, res) => {
+      dbapi.addUser(req, res, db)
+    })
 
-  server.listen(3000)
-})
+    server.listen(3000)
+  }
+)
 

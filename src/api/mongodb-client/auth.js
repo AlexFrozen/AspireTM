@@ -35,7 +35,7 @@ function auth (req, res, db) {
         fullName: firstName + ' ' + lastName,
         role: role,
       }, (errorNewToken, resNewToken) => {
-        if (errorNewToken || resNewToken.insertedCount != 1) {
+        if (errorNewToken || resNewToken.insertedCount !== 1) {
           answer.status = 500
         } else {
           answer.status = 200

@@ -60,7 +60,7 @@ function listTasks (req, res, db) {
         if (errorTasksCount) {
           answer.status = 500
           res.status(answer.status).json(answer)
-        } else if (count == 0) {
+        } else if (count === 0) {
           answer.status = 200
           answer.totalTasks = 0
           res.status(answer.status).json(answer)
@@ -120,7 +120,7 @@ function listTasks (req, res, db) {
               answer.tasksSent = tasklist.length
               answer.sort = {
                 field: orderField,
-                order: sortDir == -1 ? 'desc' : 'asc',
+                order: sortDir === -1 ? 'desc' : 'asc',
               }
               if ('filter' in req.query) {
                 answer.filter = {}
