@@ -21,7 +21,7 @@ MongoClient.connect(
       { eMail: 'admin@no.mail' },
       { $set: { password: pass } },
       (errorFindAdmin, resAdminFound) => {
-        if (resAdminFound.value == null) {
+        if (resAdminFound.value === null) {
           console.log('Default user is not found, trying to create...')
           col.insertOne({
             firstName: 'Aspire',
