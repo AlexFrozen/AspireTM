@@ -1,10 +1,7 @@
+// ---------- Main rules for project.
 {
-  "env": { "node": true },
   "parser": "babel-eslint",
   "extends": "eslint:recommended",
-//  "plugins": [
-//    "react"
-//  ],
   "rules": {
 // ----------- Feel
     "no-console": "warn",
@@ -51,7 +48,6 @@
     "no-confusing-arrow": [
       "error", { "allowParens": false }
     ],
-
 // ----------- Look
     "linebreak-style": ["error", "unix"],
     "no-mixed-spaces-and-tabs": "error",
