@@ -16,7 +16,9 @@ function listTasks (req, res, db) {
       answer.status = 400
       res.status(answer.status).json(answer)
       return
-    } else pagesize = 1 * req.query.pagesize
+    } else {
+      pagesize = 1 * req.query.pagesize
+    }
   }
 
   if ('pagenum' in req.query) {
@@ -24,7 +26,9 @@ function listTasks (req, res, db) {
       answer.status = 400
       res.status(answer.status).json(answer)
       return
-    } else pagenum = req.query.pagenum - 1
+    } else {
+      pagenum = req.query.pagenum - 1
+    }
   }
 
   const Tokens = db.collection('Tokens')
@@ -52,7 +56,7 @@ function listTasks (req, res, db) {
           query.name = { $regex: req.query.filter.search, $options: 'i' }
         }
       }
-      Tasks.count(query , (errorTasksCount, count) => {
+      Tasks.count(query, (errorTasksCount, count) => {
         if (errorTasksCount) {
           answer.status = 500
           res.status(answer.status).json(answer)
