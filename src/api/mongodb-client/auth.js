@@ -8,8 +8,8 @@ function auth (req, res, db) {
     return
   }
   const pass = crypto.createHash('sha256')
-    .update(req.body.password)
-    .digest('hex')
+  .update(req.body.password)
+  .digest('hex')
 
   const Users = db.collection('Users')
   Users.findOne({
@@ -26,8 +26,8 @@ function auth (req, res, db) {
       const lastName = resToken.lastName
       const role = resToken.role
       const token = crypto.createHash('sha256')
-        .update(resToken._id + req.ip + Math.random() + 'hash59388634')
-        .digest('hex')
+      .update(resToken._id + req.ip + Math.random() + 'hash59388634')
+      .digest('hex')
       const Tokens = db.collection('Tokens')
       Tokens.insertOne({
         token: token,

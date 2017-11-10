@@ -30,8 +30,8 @@ function addUser (req, res, db) {
       // Especially idManager as 24 length and [0-9a-f] symbols
 
       const pass = crypto.createHash('sha256')
-        .update(req.body.password)
-        .digest('hex')
+      .update(req.body.password)
+      .digest('hex')
       const doc = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
