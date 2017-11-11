@@ -11,8 +11,13 @@
     "react"
   ],
   "rules": {
+    "function-paren-newline": "off",
+    "no-extra-parens": "off",
     "react/jsx-uses-vars": "error",
     "react/jsx-uses-react": "error",
-    "react/jsx-closing-bracket-location": ["error", "line-aligned"]
+    "react/jsx-closing-tag-location": "error",
+    "react/jsx-closing-bracket-location": ["error", "line-aligned"],
+    "react/jsx-curly-spacing": ["error", {"when": "never", "children": true}],
+    "react/jsx-equals-spacing": ["error", "never"]
   }
 }

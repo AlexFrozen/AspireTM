@@ -11,9 +11,12 @@ class Desktop extends Component {
     let desktop = ''
     switch (this.props.viewer) {
       case 'welcome': desktop
-        = <center>
-          <h2>Welcome to Aspire Task Manager</h2>
-        </center>; break
+        = (
+          <center>
+            <h2>Welcome to Aspire Task Manager</h2>
+          </center>
+        )
+        break
       case 'TaskEditor': desktop
         = <TaskEditor setViewer={this.props.setViewer} />
         break

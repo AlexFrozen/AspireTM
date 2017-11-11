@@ -6,9 +6,11 @@ class AttachList extends Component {
     const links = []
     let bkey = 1
     this.props.list.forEach((attach) => {
-      links.push(<div key={bkey++}>
-        <LabelClick name={attach.name} url={attach.url} />
-      </div>)
+      links.push(
+        <div key={bkey++}>
+          <LabelClick name={attach.name} url={attach.url} />
+        </div>
+      )
     })
     return (
       <div>{links}</div>

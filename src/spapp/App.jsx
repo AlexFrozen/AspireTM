@@ -46,21 +46,23 @@ class App extends Component {
 
   render() {
     return (
-      <div className='App-body'><div className='App-ribbon'>
-        <Top
-          apiUrl={this.props.apiUrl}
-          token={this.credentials.token}
-          authorized={this.state.authorized}
-          isAdmin={this.credentials.isAdmin}
-          firstName={this.credentials.firstName}
-          lastName={this.credentials.lastName}
-          viewer={this.state.viewer}
-          setViewer={this.setViewer}
-          didLogin={this.didLogin}
-          didLogout={this.didLogout}
-        />
-        <Desktop viewer={this.state.viewer} setViewer={this.setViewer} />
-      </div></div>
+      <div className='App-body'>
+        <div className='App-ribbon'>
+          <Top
+            apiUrl={this.props.apiUrl}
+            token={this.credentials.token}
+            authorized={this.state.authorized}
+            isAdmin={this.credentials.isAdmin}
+            firstName={this.credentials.firstName}
+            lastName={this.credentials.lastName}
+            viewer={this.state.viewer}
+            setViewer={this.setViewer}
+            didLogin={this.didLogin}
+            didLogout={this.didLogout}
+          />
+          <Desktop viewer={this.state.viewer} setViewer={this.setViewer} />
+        </div>
+      </div>
     )
   }
 }
