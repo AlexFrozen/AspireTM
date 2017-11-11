@@ -12,16 +12,16 @@ class Top extends Component {
     this.setUsersViewer = this.setUsersViewer.bind(this)
   }
 
-  setTaskEditor(e) {
+  setTaskEditor() {
     this.props.setViewer('TaskEditor')
   }
-  setTaskListViewer(e) {
+  setTaskListViewer() {
     this.props.setViewer('TaskListViewer')
   }
-  setUserEditor(e) {
+  setUserEditor() {
     this.props.setViewer('UserEditor')
   }
-  setUsersViewer(e) {
+  setUsersViewer() {
     this.props.setViewer('UsersViewer')
   }
 

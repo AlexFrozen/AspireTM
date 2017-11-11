@@ -30,7 +30,7 @@ class TaskTablePager extends Component {
       }
 
       for (let i = first; i <= last; i++) {
-        if (i == curr) {
+        if (i === curr) {
           buttonStyle = 'TaskTablePager-curr'
         } else {
           buttonStyle = 'TaskTablePager-page'

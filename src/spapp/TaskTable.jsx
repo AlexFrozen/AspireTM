@@ -9,7 +9,7 @@ class TaskTable extends Component {
     this.rowClicked = this.rowClicked.bind(this)
   }
 
-  rowClicked(e) {
+  rowClicked() {
     this.props.setViewer('TaskViewer')
   }
   render() {

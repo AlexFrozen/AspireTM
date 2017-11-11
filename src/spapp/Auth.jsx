@@ -18,15 +18,15 @@ class Auth extends Component {
     this.passChange = this.passChange.bind(this)
   }
 
-  loginChange(e) {
-    this.setState({ login: e.target.value })
+  loginChange(ev) {
+    this.setState({ login: ev.target.value })
   }
 
-  passChange(e) {
-    this.setState({ pass: e.target.value })
+  passChange(ev) {
+    this.setState({ pass: ev.target.value })
   }
 
-  doLogin(e) {
+  doLogin() {
     fetch(`${this.props.apiUrl}auth`, {
       method: 'POST',
       headers: {
@@ -37,8 +37,9 @@ class Auth extends Component {
         login: this.state.login,
         password: this.state.pass,
       }),
-    }).then((response) => {
-      if (response.status == 200) {
+    })
+    .then((response) => {
+      if (response.status === 200) {
         return response.json()
       } else {
         const error = new Error('Authorization error')
@@ -64,8 +65,8 @@ class Auth extends Component {
         pass: '',
       })
     })
-    .catch(e => {
-      if (e.bad_auth != true) {
+    .catch(errorLogin => {
+      if (errorLogin.bad_auth !== true) {
         alert('Possibly network problem')
       }
       this.setState({
@@ -75,9 +76,9 @@ class Auth extends Component {
     })
   }
 
-  doLogout(e) {
+  doLogout() {
     fetch(`${this.props.apiUrl}${this.props.token}/logout`)
-    .then(response => {
+    .then(() => {
       this.props.didLogout()
     })
   }

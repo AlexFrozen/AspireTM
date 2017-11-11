@@ -10,7 +10,7 @@ class TaskViewer extends Component {
     this.setTaskListViewer = this.setTaskListViewer.bind(this)
   }
 
-  setTaskListViewer(e) {
+  setTaskListViewer() {
     this.props.setViewer('TaskListViewer')
   }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { LabelClick } from './LabelClick.jsx'
-import { Button } from './Button.jsx'
+//import { LabelClick } from './LabelClick.jsx'
+//import { Button } from './Button.jsx'
 
 class AttachListDeletable extends Component {
   render() {

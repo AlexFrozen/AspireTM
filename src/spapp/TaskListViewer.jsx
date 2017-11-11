@@ -19,13 +19,48 @@ class TaskListViewer extends Component {
   }
   render() {
     const ROWS = [
-      { name: 'Nam1', doer: 'qwer asdf', priority: 'Urgent', deadline: 'weeks' },
-      { name: 'Nam2', doer: 'asdf zxcv', priority: 'Urgent', deadline: 'weeks' },
-      { name: 'Nam3', doer: 'erty sdfg', priority: 'Medium', deadline: 'weeks' },
-      { name: 'Nam4', doer: 'qwer asdf', priority: 'Urgent', deadline: 'weeks' },
-      { name: 'Nam5', doer: 'qwer asdf', priority: 'Medium', deadline: 'weeks' },
-      { name: 'Nam6', doer: 'qwer asdf', priority: 'Urgent', deadline: 'we' },
-      { name: 'Nam7', doer: 'qwer asdf', priority: 'Blocker', deadline: 'tomor' },
+      {
+        name: 'Nam1',
+        doer: 'qwer asdf',
+        priority: 'Urgent',
+        deadline: 'weeks',
+      },
+      {
+        name: 'Nam2',
+        doer: 'asdf zxcv',
+        priority: 'Urgent',
+        deadline: 'weeks',
+      },
+      {
+        name: 'Nam3',
+        doer: 'erty sdfg',
+        priority: 'Medium',
+        deadline: 'weeks',
+      },
+      {
+        name: 'Nam4',
+        doer: 'qwer asdf',
+        priority: 'Urgent',
+        deadline: 'weeks',
+      },
+      {
+        name: 'Nam5',
+        doer: 'qwer asdf',
+        priority: 'Medium',
+        deadline: 'weeks',
+      },
+      {
+        name: 'Nam6',
+        doer: 'qwer asdf',
+        priority: 'Urgent',
+        deadline: 'we',
+      },
+      {
+        name: 'Nam7',
+        doer: 'qwer asdf',
+        priority: 'Blocker',
+        deadline: 'tomor',
+      },
     ]
     return (
       <div>

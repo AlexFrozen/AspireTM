@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { AttachListDeletable } from './AttachListDeletable.jsx'
-import { AttachUploader } from './AttachUploader.jsx'
+//import { AttachListDeletable } from './AttachListDeletable.jsx'
+//import { AttachUploader } from './AttachUploader.jsx'
 
 class AttachListEditor extends Component {
   render() {
