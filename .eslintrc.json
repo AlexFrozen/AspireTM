@@ -19,6 +19,7 @@
       "e",
       "cb",
       "eval",
+      "event",
       "callback"
     ],
     "no-unreachable": "error",
