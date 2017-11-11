@@ -27,7 +27,7 @@ class UsersViewer extends Component {
       },
     ]
     return (
-      <div><UsersTable rows={USERS}/></div>
+      <div><UsersTable rows={USERS} /></div>
     )
   }
 }
