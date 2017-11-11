@@ -59,7 +59,10 @@ class Top extends Component {
           })
         }
       }
-      toolbar = <SetOfButtons className='Menu' buttons={buttons} />
+      toolbar = <SetOfButtons
+        className='Menu'
+        buttons={buttons}
+      />
     }
     return (
       <div className='Top'>

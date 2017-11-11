@@ -35,16 +35,23 @@ class TaskTablePager extends Component {
         } else {
           buttonStyle = 'TaskTablePager-page'
         }
-        middlePages.push(<Button key={i}
+        middlePages.push(<Button
+          key={i}
           caption={i}
           className={buttonStyle}
         />)
       }
       return (
         <div>
-          <Button caption="Previous" className="TaskTablePager-prev" />
+          <Button
+            caption="Previous"
+            className="TaskTablePager-prev"
+          />
           {middlePages}
-          <Button caption="Next" className="TaskTablePager-next"/>
+          <Button
+            caption="Next"
+            className="TaskTablePager-next"
+          />
         </div>
       )
     } else {

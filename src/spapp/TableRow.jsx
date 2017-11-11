@@ -6,7 +6,10 @@ class TableRow extends Component {
     const cols = []
     let bkey = 1
     this.props.cols.forEach((col) => {
-      cols.push(<TableCell key={bkey++} val={col} />)
+      cols.push(<TableCell
+        key={bkey++}
+        val={col}
+      />)
     })
     return (
       <tr

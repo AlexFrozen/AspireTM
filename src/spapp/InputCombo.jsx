@@ -5,7 +5,12 @@ class InputCombo extends Component {
     const options = []
     let bkey = 1
     this.props.list.forEach((el) => {
-      options.push(<option key={bkey++} value={el[0]}>{el[1]}</option>)
+      options.push(
+        <option
+          key={bkey++}
+          value={el[0]}
+        >{el[1]}
+        </option>)
     })
     return (
       <select>

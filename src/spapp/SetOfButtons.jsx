@@ -6,7 +6,8 @@ class SetOfButtons extends Component {
     const buttons = []
     let bkey = 1
     this.props.buttons.forEach((button) => {
-      buttons.push(<Button key={bkey++}
+      buttons.push(<Button
+        key={bkey++}
         className={button.className}
         caption={button.caption}
         onClick={button.onClick}

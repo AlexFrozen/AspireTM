@@ -60,7 +60,10 @@ class App extends Component {
             didLogin={this.didLogin}
             didLogout={this.didLogout}
           />
-          <Desktop viewer={this.state.viewer} setViewer={this.setViewer} />
+          <Desktop
+            viewer={this.state.viewer}
+            setViewer={this.setViewer}
+          />
         </div>
       </div>
     )

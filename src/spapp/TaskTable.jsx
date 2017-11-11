@@ -17,7 +17,8 @@ class TaskTable extends Component {
     let bkey = 1
     this.props.rows.forEach((row) => {
       const ikey = `fixme-${bkey}`
-      rows.push(<TableRow key={bkey++}
+      rows.push(<TableRow
+        key={bkey++}
         className='TaskTable-row'
         rowid={ikey}
         onClick={this.rowClicked}

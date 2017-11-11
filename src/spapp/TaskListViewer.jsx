@@ -71,7 +71,11 @@ class TaskListViewer extends Component {
           rows={ROWS}
           setViewer={this.props.setViewer}
         />
-        <TaskTablePager pad='4' pages='24' currentPage='9' />
+        <TaskTablePager
+          pad='4'
+          pages='24'
+          currentPage='9'
+        />
       </div>
     )
   }
