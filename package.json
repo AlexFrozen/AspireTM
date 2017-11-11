@@ -4,10 +4,11 @@
   "description": "Task manager application",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "init": "node initdb.js",
+    "lint": "eslint -f codeframe src/**/*.js src/**/*.jsx",
     "build": "webpack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "init": "node initdb.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
