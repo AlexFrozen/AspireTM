@@ -86,9 +86,10 @@ class Auth extends Component {
   render() {
     const elems = []
     if (this.props.authorized) {
+      const fullName = `${this.props.firstName} ${this.props.lastName} `
       elems.push(<Label
         key='1'
-        caption={`${this.props.firstName  } ${  this.props.lastName  } `}
+        caption={fullName}
       />)
       elems.push(<Button
         key='2'
