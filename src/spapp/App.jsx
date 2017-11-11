@@ -28,7 +28,7 @@ class App extends Component {
     this.credentials.eMail = cred.eMail
     this.credentials.isAdmin = cred.isAdmin
     this.credentials.token = cred.token
-    this.setState( {authorized: true, viewer: 'TaskListViewer'} )
+    this.setState({ authorized: true, viewer: 'TaskListViewer' })
   }
 
   didLogout() {
@@ -37,11 +37,11 @@ class App extends Component {
     this.credentials.eMail = ''
     this.credentials.isAdmin = false
     this.credentials.token = ''
-    this.setState( {authorized: false, viewer: 'welcome'} )
+    this.setState({ authorized: false, viewer: 'welcome' })
   }
 
   setViewer(viewer) {
-    this.setState( {viewer: viewer} )
+    this.setState({ viewer: viewer })
   }
 
   render() {
