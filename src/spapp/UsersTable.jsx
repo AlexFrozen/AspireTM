@@ -8,9 +8,13 @@ class UsersTable extends Component {
     const rows = []
     let bkey = 1
     this.props.rows.forEach((row) => {
-      rows.push(<TableRow key={bkey++} className='UsersTable-row' cols={
-        [row.firstname, row.lastname, row.email, row.manager, row.role]
-      }/>)
+      rows.push(<TableRow
+        key={bkey++}
+        className='UsersTable-row'
+        cols={
+          [row.firstname, row.lastname, row.email, row.manager, row.role]
+        }
+      />)
     })
     return (
       <table border="1">

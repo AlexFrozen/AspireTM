@@ -69,7 +69,8 @@ class TaskListViewer extends Component {
           col={this.state.sortColumn}
           dir={this.state.sortDirection}
           rows={ROWS}
-          setViewer={this.props.setViewer} />
+          setViewer={this.props.setViewer}
+        />
         <TaskTablePager pad='4' pages='24' currentPage='9' />
       </div>
     )
