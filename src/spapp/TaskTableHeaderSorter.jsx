@@ -7,19 +7,19 @@ class TaskTableHeaderSorter extends Component {
       name: 'Name',
       doer: 'Doer',
       priority: 'Priority',
-      deadline: 'Deadline'
+      deadline: 'Deadline',
     }
     let direction = ''
     if (this.props.dir === 'up') {
       direction = '↑'
-    }else{
+    } else {
       direction = '↓'
     }
     switch (this.props.col) {
-      case 'name': captions.name = direction+captions.name; break
-      case 'doer': captions.doer = direction+captions.doer; break
-      case 'priority': captions.priority = direction+captions.priority; break
-      case 'deadline': captions.deadline = direction+captions.deadline; break
+      case 'name': captions.name = direction + captions.name; break
+      case 'doer': captions.doer = direction + captions.doer; break
+      case 'priority': captions.priority = direction + captions.priority; break
+      case 'deadline': captions.deadline = direction + captions.deadline; break
     }
     return (
       <tr>

@@ -9,19 +9,19 @@ class TaskTableFilter extends Component {
       [ 2, 'AlexAnder Moiseev' ],
       [ 3, 'Alex Fisher' ],
       [ 4, 'Oleg Gazmanoff' ],
-      [ 5, 'Brian May' ]
+      [ 5, 'Brian May' ],
     ]
     const PRIO = [
       [ 1, 'Low' ],
       [ 2, 'Medium' ],
-      [ 3, 'High' ]
+      [ 3, 'High' ],
     ]
     const PAGE = [
       [ 1, '10' ],
       [ 2, '25' ],
       [ 3, '50' ],
       [ 4, '100' ],
-      [ 5, '500' ]
+      [ 5, '500' ],
     ]
     return (
       <div>

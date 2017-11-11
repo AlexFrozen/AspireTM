@@ -10,27 +10,27 @@ class Desktop extends Component {
   render() {
     let desktop = ''
     switch (this.props.viewer) {
-      case 'welcome': desktop =
-        <center>
+      case 'welcome': desktop
+        = <center>
           <h2>Welcome to Aspire Task Manager</h2>
         </center>; break
-      case 'TaskEditor': desktop =
-        <TaskEditor setViewer={this.props.setViewer} />
+      case 'TaskEditor': desktop
+        = <TaskEditor setViewer={this.props.setViewer} />
         break
-      case 'TaskViewer': desktop =
-        <TaskViewer setViewer={this.props.setViewer} />
+      case 'TaskViewer': desktop
+        = <TaskViewer setViewer={this.props.setViewer} />
         break
-      case 'UserEditor': desktop =
-        <UserEditor setViewer={this.props.setViewer} />
+      case 'UserEditor': desktop
+        = <UserEditor setViewer={this.props.setViewer} />
         break
-      case 'UsersViewer': desktop =
-        <UsersViewer />;
+      case 'UsersViewer': desktop
+        = <UsersViewer />
         break
-      case 'TaskListViewer': desktop =
-        <TaskListViewer setViewer={this.props.setViewer} />
+      case 'TaskListViewer': desktop
+        = <TaskListViewer setViewer={this.props.setViewer} />
         break
-      default: desktop =
-        <center>No desktop for {desktop}</center>
+      default: desktop
+        = <center>No desktop for {desktop}</center>
     }
     return (
       <div className="Desktop">

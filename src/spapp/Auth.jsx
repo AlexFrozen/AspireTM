@@ -10,7 +10,7 @@ class Auth extends Component {
     super(props)
     this.state = {
       login: '',
-      pass: ''
+      pass: '',
     }
     this.doLogin = this.doLogin.bind(this)
     this.doLogout = this.doLogout.bind(this)
@@ -19,52 +19,58 @@ class Auth extends Component {
   }
 
   loginChange(e) {
-    this.setState({login: e.target.value})
+    this.setState({ login: e.target.value })
   }
 
   passChange(e) {
-    this.setState({pass: e.target.value})
+    this.setState({ pass: e.target.value })
   }
 
   doLogin(e) {
     fetch(`${this.props.apiUrl}auth`, {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         login: this.state.login,
-        password: this.state.pass
-      })
+        password: this.state.pass,
+      }),
     }).then((response) => {
       if (response.status == 200) {
         return response.json()
-      }else{
-        let error = new Error('Authorization error')
+      } else {
+        const error = new Error('Authorization error')
         error.bad_auth = true
         throw error
       }
-    }).then((answer) => {
+    })
+    .then((answer) => {
       let isAdmin = false
-      if (answer.role === 'Admin') isAdmin = true
+      if (answer.role === 'Admin') {
+        isAdmin = true
+      }
       this.props.didLogin({
         firstName: answer.firstName,
         lastName: answer.lastName,
         eMail: this.state.login,
         isAdmin: isAdmin,
         idUser: answer.idUser,
-        token: answer.token
+        token: answer.token,
       })
       this.setState({
         login: '',
-        pass: ''
+        pass: '',
       })
-    }).catch(e => {
-      if (e.bad_auth != true) alert ('Possibly network problem')
+    })
+    .catch(e => {
+      if (e.bad_auth != true) {
+        alert('Possibly network problem')
+      }
       this.setState({
         login: '',
-        pass: ''
+        pass: '',
       })
     })
   }
@@ -79,47 +85,37 @@ class Auth extends Component {
   render() {
     const elems = []
     if (this.props.authorized) {
-      elems.push(
-        <Label
-          key='1'
-          caption={this.props.firstName + ' ' + this.props.lastName + ' '}
-        />
-      )
-      elems.push(
-        <Button
-          key='2'
-          className='Menu-button'
-          caption='Logout'
-          onClick={this.doLogout}
-        />
-      )
-    }else{
-      elems.push(
-        <InputEdit
-          key='3'
-          className='Auth-input'
-          hint='E-Mail address'
-          value={this.state.login}
-          onChange={this.loginChange}
-        />
-      )
-      elems.push(
-        <InputPass
-          key='4'
-          className='Auth-input'
-          hint='Password'
-          value={this.state.pass}
-          onChange={this.passChange}
-        />
-      )
-      elems.push(
-        <Button
-          key='5'
-          className='Menu-button'
-          caption='Log in'
-          onClick={this.doLogin}
-        />
-      )
+      elems.push(<Label
+        key='1'
+        caption={`${this.props.firstName  } ${  this.props.lastName  } `}
+      />)
+      elems.push(<Button
+        key='2'
+        className='Menu-button'
+        caption='Logout'
+        onClick={this.doLogout}
+      />)
+    } else {
+      elems.push(<InputEdit
+        key='3'
+        className='Auth-input'
+        hint='E-Mail address'
+        value={this.state.login}
+        onChange={this.loginChange}
+      />)
+      elems.push(<InputPass
+        key='4'
+        className='Auth-input'
+        hint='Password'
+        value={this.state.pass}
+        onChange={this.passChange}
+      />)
+      elems.push(<Button
+        key='5'
+        className='Menu-button'
+        caption='Log in'
+        onClick={this.doLogin}
+      />)
     }
     return (
       <div className='Auth'>

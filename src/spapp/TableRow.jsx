@@ -14,7 +14,7 @@ class TableRow extends Component {
         onClick={this.props.onClick}
         className={this.props.className}
       >
-       {cols}
+        {cols}
       </tr>
     )
   }

@@ -7,33 +7,32 @@ class TaskTablePager extends Component {
     const middlePages = []
     let buttonStyle = ''
 
-    if(this.props.pages > 1) {
-
-      let pad = this.props.pad * 1
-      let pages = this.props.pages * 1
-      let curr = this.props.currentPage * 1
+    if (this.props.pages > 1) {
+      const pad = this.props.pad * 1
+      const pages = this.props.pages * 1
+      const curr = this.props.currentPage * 1
 
       let first, last
 
       if (pages <= pad * 2) {
         first = 1
         last = pages
-      }else{
+      } else {
         first = curr - pad
         last = curr + pad
         if (first < 1) {
           first = 1
           last = pad * 2 + 1
-        }else if (last > pages) {
+        } else if (last > pages) {
           first = pages - pad * 2
           last = pages
         }
       }
 
-      for(let i=first; i<=last; i++) {
-        if(i == curr) {
+      for (let i = first; i <= last; i++) {
+        if (i == curr) {
           buttonStyle = 'TaskTablePager-curr'
-        }else{
+        } else {
           buttonStyle = 'TaskTablePager-page'
         }
         middlePages.push(<Button key={i}
@@ -48,7 +47,9 @@ class TaskTablePager extends Component {
           <Button caption="Next" className="TaskTablePager-next"/>
         </div>
       )
-    }else return([])
+    } else {
+      return []
+    }
   }
 }
 

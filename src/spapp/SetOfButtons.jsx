@@ -4,7 +4,7 @@ import { Button } from './Button.jsx'
 class SetOfButtons extends Component {
   render() {
     const buttons = []
-    let bkey=1;
+    let bkey = 1
     this.props.buttons.forEach((button) => {
       buttons.push(<Button key={bkey++}
         className={button.className}

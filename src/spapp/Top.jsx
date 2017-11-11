@@ -12,44 +12,52 @@ class Top extends Component {
     this.setUsersViewer = this.setUsersViewer.bind(this)
   }
 
-  setTaskEditor(e) { this.props.setViewer('TaskEditor') }
-  setTaskListViewer(e) { this.props.setViewer('TaskListViewer') }
-  setUserEditor(e) { this.props.setViewer('UserEditor') }
-  setUsersViewer(e) { this.props.setViewer('UsersViewer') }
+  setTaskEditor(e) {
+    this.props.setViewer('TaskEditor')
+  }
+  setTaskListViewer(e) {
+    this.props.setViewer('TaskListViewer')
+  }
+  setUserEditor(e) {
+    this.props.setViewer('UserEditor')
+  }
+  setUsersViewer(e) {
+    this.props.setViewer('UsersViewer')
+  }
 
   render() {
     const buttons = []
     let toolbar = ''
     if (this.props.authorized) {
-      if (this.props.viewer !== 'TaskEditor') buttons.push(
-        {
+      if (this.props.viewer !== 'TaskEditor') {
+        buttons.push({
           className: 'Menu-button',
           caption: 'New task',
-          onClick: this.setTaskEditor
-        }
-      )
-      if (this.props.viewer !== 'TaskListViewer') buttons.push(
-        {
+          onClick: this.setTaskEditor,
+        })
+      }
+      if (this.props.viewer !== 'TaskListViewer') {
+        buttons.push({
           className: 'Menu-button',
           caption: 'Task list',
-          onClick: this.setTaskListViewer
-        }
-      )
+          onClick: this.setTaskListViewer,
+        })
+      }
       if (this.props.isAdmin) {
-        if (this.props.viewer !== 'UserEditor') buttons.push(
-          {
+        if (this.props.viewer !== 'UserEditor') {
+          buttons.push({
             className: 'Menu-button',
             caption: 'New user',
-            onClick: this.setUserEditor
-          }
-        )
-        if (this.props.viewer !== 'UsersViewer') buttons.push(
-          {
+            onClick: this.setUserEditor,
+          })
+        }
+        if (this.props.viewer !== 'UsersViewer') {
+          buttons.push({
             className: 'Menu-button',
             caption: 'Users',
-            onClick: this.setUsersViewer
-          }
-        )
+            onClick: this.setUsersViewer,
+          })
+        }
       }
       toolbar = <SetOfButtons className='Menu' buttons={buttons} />
     }

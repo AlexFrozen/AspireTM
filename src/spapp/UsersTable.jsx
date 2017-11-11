@@ -15,7 +15,7 @@ class UsersTable extends Component {
     return (
       <table border="1">
         <thead>
-      <UsersTableHeaderSorter />
+          <UsersTableHeaderSorter />
         </thead>
         <tbody>
           {rows}

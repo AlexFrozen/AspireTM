@@ -10,13 +10,13 @@ class TaskTable extends Component {
   }
 
   rowClicked(e) {
-    this.props.setViewer('TaskViewer');
+    this.props.setViewer('TaskViewer')
   }
   render() {
     const rows = []
     let bkey = 1
     this.props.rows.forEach((row) => {
-      let ikey = 'fixme-'+bkey
+      const ikey = `fixme-${bkey}`
       rows.push(<TableRow key={bkey++}
         className='TaskTable-row'
         rowid={ikey}
