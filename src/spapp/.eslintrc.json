@@ -11,6 +11,7 @@
     "react"
   ],
   "rules": {
+// -------- JSX related rules from eslint-plugin-react.
     "function-paren-newline": "off",
     "no-extra-parens": "off",
     "react/jsx-uses-vars": "error",
@@ -49,6 +50,71 @@
         "beforeSelfClosing": "always",
         "afterOpening": "never"
       }
-    ]
+    ],
+    "react/jsx-wrap-multilines": [
+      "error", {
+        "declaration": true,
+        "assignment": true,
+        "return": true,
+        "arrow": true
+      }
+    ],
+// -------- True React rules.
+// ------ Props related.
+    "react/prop-types": "error",
+    "react/require-default-props": "error",
+    "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
+    "react/forbid-foreign-prop-types": "error",
+    "react/boolean-prop-naming": [
+      "error", { "rule": "^(is|has)[A-Z]([A-Za-z0-9]?)+" }
+    ],
+    "react/default-props-match-prop-types": [
+      "error", { "allowRequiredDefaults": false }
+    ],
+    "react/forbid-component-props": [
+      "error", {
+        "forbid": [
+          "className",
+          "style",
+          "id"
+        ]
+      }
+    ],
+    "react/no-unused-prop-types": "error",
+// ------ State related.
+    "react/no-did-mount-set-state": ["error", "disallow-in-func"],
+    "react/no-did-update-set-state": ["error", "disallow-in-func"],
+    "react/no-direct-mutation-state": "error",
+    "react/no-unused-state": "error",
+    "react/no-will-update-set-state": ["error", "disallow-in-func"],
+// ------ Class fields related.
+    "react/display-name": "error",
+// ------ React ES6.
+    "react/prefer-es6-class": ["error", "always"],
+    "react/react-in-jsx-scope": "error",
+// ------ Danger prevention.
+    "react/no-array-index-key": "error",
+    "react/no-children-prop": "error",
+//    "react/destructuring-assignment": ["error", "never"],
+    "react/no-danger": "error",
+    "react/no-danger-with-children": "error",
+    "react/no-deprecated": "error",
+    "react/no-find-dom-node": "error",
+    "react/no-is-mounted": "error",
+    "react/no-multi-comp": "error",
+    "react/no-redundant-should-component-update": "error",
+    "react/no-render-return-value": "error",
+    "react/no-typos": "error",
+    "react/no-unescaped-entities": "error",
+    "react/require-render-return": "error",
+    "react/self-closing-comp": [
+      "error", {
+        "component": true,
+        "html": true
+      }
+    ],
+    "react/void-dom-elements-no-children": "error"
+// ------ Implement after some experience.
+//    "react/sort-comp": [<enabled>, { order: <order>, groups: <groups> }],
   }
 }
