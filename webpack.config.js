@@ -33,6 +33,7 @@ module.exports = [
               test: /\.jsx$/,
               loader: require.resolve('babel-loader'),
               options: {
+                plugins: ["transform-class-properties"],
                 compact: true,
                 presets: ['react']
               }
