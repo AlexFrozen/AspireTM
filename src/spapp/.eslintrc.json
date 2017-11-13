@@ -28,15 +28,13 @@
         "when": "always"
       }
     ],
-// Is it bug in eslint-plugin-react?
-//    "react/jsx-no-bind": [
-//      "error", {
-//        "ignoreRefs": false,
-//        "allowArrowFunctions": false,
-//        "allowFunctions": false,
-//        "allowBind": false
-//      }
-//    ],
+    "react/jsx-no-bind": [
+      "error", {
+        "ignoreRefs": false,
+        "allowArrowFunctions": false,
+        "allowBind": false
+      }
+    ],
     "react/jsx-no-bind": "error",
     "react/jsx-key": "error",
     "react/jsx-no-comment-textnodes": "error",
