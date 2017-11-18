@@ -3,7 +3,7 @@ var nodeExternals = require('webpack-node-externals');
 module.exports = [
   {
     entry: './src/index.js',
-    output:  {
+    output: {
       path: __dirname,
       filename: 'server.js'
     },
@@ -12,7 +12,7 @@ module.exports = [
   },
   {
     entry: './src/init.js',
-    output:  {
+    output: {
       path: __dirname,
       filename: 'initdb.js'
     },
