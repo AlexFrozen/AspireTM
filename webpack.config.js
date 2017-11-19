@@ -1,4 +1,5 @@
-var nodeExternals = require('webpack-node-externals');
+var nodeExternals = require('webpack-node-externals')
+var webpack = require('webpack')
 
 module.exports = [
   {
@@ -20,6 +21,18 @@ module.exports = [
     externals: nodeExternals()
   },
   {
+    plugins:[
+      new webpack.DefinePlugin({
+        'process.env':{
+          'NODE_ENV': JSON.stringify('production')
+        }
+      }),
+      new webpack.optimize.UglifyJsPlugin({
+        compress:{
+          warnings: false
+        }
+      })
+    ],
     entry: './src/spapp/index.jsx',
     output: {
       path: __dirname + '/static',
@@ -33,9 +46,12 @@ module.exports = [
               test: /\.jsx$/,
               loader: require.resolve('babel-loader'),
               options: {
-                plugins: ["transform-class-properties"],
+                plugins: [
+                  "transform-class-properties",
+                  "transform-react-remove-prop-types"
+                ],
                 compact: true,
-                presets: ['react']
+                presets: ['env', 'react']
               }
             },
             {
