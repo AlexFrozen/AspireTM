@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint -f codeframe src/**/*.js src/**/*.jsx",
+    "lintfix": "eslint -f codeframe src/**/*.js src/**/*.jsx --fix",
     "build": "webpack",
     "init": "node initdb.js",
     "test": "echo \"Error: no test specified\" && exit 1",
