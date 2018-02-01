@@ -59,6 +59,14 @@ h5 {
 	cursor: pointer;
 	text-decoration: underline;
 }
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+table, th, td {
+	border: 1px solid #004000;
+}
+
 </style>
 <script>
 function toggle_fold(e) {
@@ -85,9 +93,45 @@ function toggle_fold(e) {
 </div>
 <div class="content">
 <h4><center>Components documentation</center></h4>
-<p></p>
+<p>Components creation rules (Should be written).</p>
 <h5 onclick="toggle_fold(this)">App</h5><div class="hidden">
-application component placeholder.
+<h6>Properties</h6>
+<table>
+<tr><th>Name</th><th>Description</th><th>Required</th><th>Default</th></tr>
+<tr><td>apiUrl</td><td>URL to API gateway.</td><td>Yes</td><td>-</td></tr>
+</table>
+<h6>Methods</h6>
+<table>
+<tr><th>Name</th><th>Description</th><th>Params</th></tr>
+<tr><td>didLogin</td><td>Change state to authorized look</td><td>Object: {firstName, lastName, eMail, isAdmin, token}</td></tr>
+<tr><td>didLogout</td><td>Change state to unauthorized look</td><td>-</td></tr>
+<tr><td>setViewer</td><td>Set displaying page</td><td>String: oneOf(['welcome', 'TaskEditor', 'TaskViewer', 'UserEditor', 'UsersViewer', 'TaskListViewer'])</td></tr>
+</table>
+</div>
+
+<h5 onclick="toggle_fold(this)">Top</h5><div class="hidden">
+<h6>Properties</h6>
+<table>
+<tr><th>Name</th><th>Description</th><th>Required</th><th>Default</th></tr>
+<tr><td>apiUrl</td><td>URL to API gateway.</td><td>Yes</td><td>-</td></tr>
+<tr><td>token</td><td>API access key</td><td>Yes</td><td>-</td></tr>
+<tr><td>authorized</td><td><b>true</b> if some user logged in</td><td>Yes</td><td>-</td></tr>
+<tr><td>isAdmin</td><td><b>true</b> if admin logged in</td><td>Yes</td><td>-</td></tr>
+<tr><td>firstName</td><td>User first name</td><td>Yes</td><td>-</td></tr>
+<tr><td>lastName</td><td>User last name</td><td>Yes</td><td>-</td></tr>
+<tr><td>viewer</td><td>Displaying page</td><td>Yes</td><td>-</td></tr>
+<tr><td>setViewer</td><td>Callback to switch pages in <b>Desktop</b>.</td><td>Yes</td><td>-</td></tr>
+<tr><td>didLogin</td><td>Callback to succesfull login</td><td>Yes</td><td>-</td></tr>
+<tr><td>didLogout</td><td>Callback to logout</td><td>Yes</td><td>-</td></tr>
+</table>
+<h6>Methods</h6>
+<table>
+<tr><th>Name</th><th>Description</th><th>Params</th></tr>
+<tr><td>setTaskEditor</td><td>Switches <b>Desktop</b> to task editor page</td><td>-</td></tr>
+<tr><td>setTaskListViewer</td><td>Switches <b>Desktop</b> to task table page</td><td>-</td></tr>
+<tr><td>setUserEditor</td><td>Switches <b>Desktop</b> to user editor page</td><td>-</td></tr>
+<tr><td>setUsersViewer</td><td>Switches <b>Desktop</b> to users table page</td><td>-</td></tr>
+</table>
 </div>
 
 </div></div>
