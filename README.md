@@ -20,6 +20,19 @@ Next step is building project
 ```sh
 npm run build
 ```
+To make ESLint code verification run next command:
+```sh
+npm run lint
+```
+To run Linter with autofix ability, execute:
+```sh
+npm run lintfix
+```
+Default code uses locally installed MongoDB database, passwordless.
+To initialize database or to reset admin password, execute:
+```sh
+npm run init
+```
 >Note: Project made with `npm` version `3.10.10` and `node` version `v6.11.4`. Older version should work in theory but it's not tested.
 
 To start project just type
@@ -28,6 +41,7 @@ npm start
 ```
 If you see `Listening on 3000` string, all is good. To view current follow URL [http://localhost:3000/static/test.html](http://localhost:3000/static/test.html)<br>
 To read development documentation visit [http://localhost:3000/static/docs/index.html](http://localhost:3000/static/docs/index.html)
+This documentation also accessible as HTML files in Docs folder.
 ## Project files
 
 ```
@@ -39,19 +53,25 @@ aspire-task-manager/
     index.html         Documentation main file
     *.html
   src/                 Source code folder
-    api/               REST API
+    .eslintrc.json     ESLint file, sets environment 'node'
+    api/               REST API Stuff
       mongodb-client/  Native MongoDB driver
         index.js       Collection of API functions interacting with DB
         *.js           API functions, one per file
     spapp/             SPA components
-      *.jsx
-      *.css
+      .eslintrc.json   ESLint React related rules
+      index.jsx        Application main file
+      *.jsx            Application components
+      theme.less       Global CSS variables (color, sizes and so on)
+      *.less           LESS Preprocessor files
   static/              Assets files for express module
     docs -> ../Docs    Symlink to documentation
     test.html          SPA loader page
     app.js             Java Script bundle built with 'npm run build'
   index.js             Server-side entry point source
+  initdb.js            Database configuration script. Admin password reset.
   server.js            Server application built with 'npm run build'
   webpack.config.js    Configuration file for webpack
   package.json         npm project file
+  .eslintrc.json       Rules for ESLint utility. Global.
 ```
