@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { InputEdit } from './InputEdit.jsx'
 import { InputPass } from './InputPass.jsx'
 import { Label } from './Label.jsx'
@@ -6,6 +7,16 @@ import { Button } from './Button.jsx'
 import './Top.less'
 
 class Auth extends Component {
+  static propTypes = {
+    apiUrl: PropTypes.string.isRequired,
+    token: PropTypes.string.isRequired,
+    authorized: PropTypes.bool.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    didLogin: PropTypes.func.isRequired,
+    didLogout: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -93,28 +104,28 @@ class Auth extends Component {
       />)
       elems.push(<Button
         key='2'
-        className='Menu-button'
+        classKind='Menu'
         caption='Logout'
         onClick={this.doLogout}
       />)
     } else {
       elems.push(<InputEdit
         key='3'
-        className='Auth-input'
+        classKind='input'
         hint='E-Mail address'
         value={this.state.login}
         onChange={this.loginChange}
       />)
       elems.push(<InputPass
         key='4'
-        className='Auth-input'
+        classKind='input'
         hint='Password'
         value={this.state.pass}
         onChange={this.passChange}
       />)
       elems.push(<Button
         key='5'
-        className='Menu-button'
+        classKind='Menu'
         caption='Log in'
         onClick={this.doLogin}
       />)

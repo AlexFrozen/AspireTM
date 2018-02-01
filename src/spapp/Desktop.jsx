@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { TaskEditor } from './TaskEditor.jsx'
 import { TaskViewer } from './TaskViewer.jsx'
 import { UserEditor } from './UserEditor.jsx'
@@ -7,6 +8,10 @@ import { TaskListViewer } from './TaskListViewer.jsx'
 import './Desktop.less'
 
 class Desktop extends Component {
+  static propTypes = {
+    viewer: PropTypes.string.isRequired,
+    setViewer: PropTypes.func.isRequired,
+  }
   render() {
     let desktop = ''
     switch (this.props.viewer) {

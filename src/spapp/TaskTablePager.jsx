@@ -1,11 +1,20 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Button } from './Button.jsx'
 import './TaskTablePager.less'
 
 class TaskTablePager extends Component {
+  static propTypes = {
+    pad: PropTypes.number,
+    pages: PropTypes.number.isRequired,
+    currentPage: PropTypes.number.isRequired,
+  }
+
+  static defaultProps = { pad: 4 }
+
   render() {
     const middlePages = []
-    let buttonStyle = ''
+    let buttonKind = ''
 
     if (this.props.pages > 1) {
       const pad = this.props.pad * 1
@@ -31,26 +40,26 @@ class TaskTablePager extends Component {
 
       for (let i = first; i <= last; i++) {
         if (i === curr) {
-          buttonStyle = 'TaskTablePager-curr'
+          buttonKind = 'Pager-curr'
         } else {
-          buttonStyle = 'TaskTablePager-page'
+          buttonKind = 'Pager-page'
         }
         middlePages.push(<Button
           key={i}
           caption={i}
-          className={buttonStyle}
+          classKind={buttonKind}
         />)
       }
       return (
         <div>
           <Button
             caption="Previous"
-            className="TaskTablePager-prev"
+            classKind="Pager-prev"
           />
           {middlePages}
           <Button
             caption="Next"
-            className="TaskTablePager-next"
+            classKind="Pager-next"
           />
         </div>
       )

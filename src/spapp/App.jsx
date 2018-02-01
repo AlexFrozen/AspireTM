@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Top } from './Top.jsx'
 import { Desktop } from './Desktop.jsx'
 import './App.less'
 
 class App extends Component {
+  static propTypes = { apiUrl: PropTypes.string.isRequired }
+
   constructor(props) {
     super(props)
     this.state = {

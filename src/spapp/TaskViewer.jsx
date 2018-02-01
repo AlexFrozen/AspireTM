@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Label } from './Label.jsx'
 import { Text } from './Text.jsx'
 import { AttachList } from './AttachList.jsx'
 import { SetOfButtons } from './SetOfButtons.jsx'
 
 class TaskViewer extends Component {
+  static propTypes = { setViewer: PropTypes.func.isRequired }
+
   constructor(props) {
     super(props)
     this.setTaskListViewer = this.setTaskListViewer.bind(this)

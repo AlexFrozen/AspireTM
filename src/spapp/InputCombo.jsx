@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class InputCombo extends Component {
+  static propTypes = { list: PropTypes.array.isRequired }
+
   render() {
     const options = []
     let bkey = 1

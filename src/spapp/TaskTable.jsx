@@ -1,9 +1,17 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { TaskTableHeaderSorter } from './TaskTableHeaderSorter.jsx'
 import { TableRow } from './TableRow.jsx'
 import './TaskTable.less'
 
 class TaskTable extends Component {
+  static propTypes = {
+    col: PropTypes.string.isRequired,
+    dir: PropTypes.string.isRequired,
+    rows: PropTypes.array.isRequired,
+    setViewer: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
     super(props)
     this.rowClicked = this.rowClicked.bind(this)
@@ -19,7 +27,7 @@ class TaskTable extends Component {
       const ikey = `fixme-${bkey}`
       rows.push(<TableRow
         key={bkey++}
-        className='TaskTable-row'
+        classKind='Simple-row'
         rowid={ikey}
         onClick={this.rowClicked}
         cols={[row.name, row.doer, row.priority, row.deadline]}

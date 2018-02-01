@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { LabelClick } from './LabelClick.jsx'
 
 class AttachList extends Component {
+  static propTypes = { list: PropTypes.array.isRequired }
+
   render() {
     const links = []
     let bkey = 1

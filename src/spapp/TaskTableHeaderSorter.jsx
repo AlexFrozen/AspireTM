@@ -1,7 +1,26 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Button } from './Button.jsx'
 
 class TaskTableHeaderSorter extends Component {
+  static propTypes = {
+    dir: PropTypes.oneOf([
+      'up',
+      'down',
+    ]),
+    col: PropTypes.oneOf([
+      'name',
+      'doer',
+      'priority',
+      'deadline',
+    ]),
+  }
+
+  static defaultProps = {
+    dir: 'down',
+    col: 'deadline',
+  }
+
   render() {
     const captions = {
       name: 'Name',
