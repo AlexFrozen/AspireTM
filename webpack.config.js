@@ -21,6 +21,7 @@ module.exports = [
     externals: nodeExternals()
   },
   {
+// Production build
     plugins:[
       new webpack.DefinePlugin({
         'process.env':{
@@ -33,6 +34,7 @@ module.exports = [
         }
       })
     ],
+// End of Production build
     entry: './src/spapp/index.jsx',
     output: {
       path: __dirname + '/static',
