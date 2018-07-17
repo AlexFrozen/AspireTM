@@ -22,18 +22,18 @@ module.exports = [
   },
   {
 // Production build
-    plugins:[
-      new webpack.DefinePlugin({
-        'process.env':{
-          'NODE_ENV': JSON.stringify('production')
-        }
-      }),
-      new webpack.optimize.UglifyJsPlugin({
-        compress:{
-          warnings: false
-        }
-      })
-    ],
+//    plugins:[
+//      new webpack.DefinePlugin({
+//        'process.env':{
+//          'NODE_ENV': JSON.stringify('production')
+//        }
+//      }),
+//      new webpack.optimize.UglifyJsPlugin({
+//        compress:{
+//          warnings: false
+//        }
+//      })
+//    ],
 // End of Production build
     entry: './src/spapp/index.jsx',
     output: {
