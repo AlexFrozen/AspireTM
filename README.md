@@ -39,7 +39,7 @@ To start project just type
 ```sh
 npm start
 ```
-If you see `Listening on 3000` string, all is good. To view current follow URL [http://localhost:3000/static/test.html](http://localhost:3000/static/test.html)<br>
+To view current follow URL [http://localhost:3000/static/test.html](http://localhost:3000/static/test.html)<br>
 To read development documentation visit [http://localhost:3000/static/docs/index.html](http://localhost:3000/static/docs/index.html)
 This documentation also accessible as HTML files in Docs folder.
 ## Project files
