@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Material_Button from '@material-ui/core/Button'
 import PropTypes from 'prop-types'
-import './Top.less'
 
 class Button extends Component {
   static propTypes = {

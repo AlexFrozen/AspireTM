@@ -4,7 +4,6 @@ import AppBar from '@material-ui/core/AppBar'
 import PropTypes from 'prop-types'
 import { SetOfButtons } from './SetOfButtons.jsx'
 import { Auth } from './Auth.jsx'
-import './Top.less'
 
 class Top extends Component {
   static propTypes = {

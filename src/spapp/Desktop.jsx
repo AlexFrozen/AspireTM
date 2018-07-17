@@ -5,7 +5,6 @@ import { TaskViewer } from './TaskViewer.jsx'
 import { UserEditor } from './UserEditor.jsx'
 import { UsersViewer } from './UsersViewer.jsx'
 import { TaskListViewer } from './TaskListViewer.jsx'
-import './Desktop.less'
 
 class Desktop extends Component {
   static propTypes = {
@@ -41,7 +40,7 @@ class Desktop extends Component {
         = <center>No desktop for {desktop}</center>
     }
     return (
-      <div className="Desktop">
+      <div>
         {desktop}
       </div>
     )
