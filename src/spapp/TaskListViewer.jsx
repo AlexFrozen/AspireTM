@@ -19,16 +19,18 @@ class TaskListViewer extends Component {
       //      page: 1,
       //      totalRows: 0,
     }
+    this.onSort = this.onSort.bind(this)
   }
+
+  onSort(col, dir) {
+    this.setState({ sortColumn: col, sortDirection: dir })
+  }
+
   render() {
     const ROWS = [
       { name: 'Nam1', doer: 'asdf', priority: 'Urgent', deadline: 'weeks' },
       { name: 'Nam2', doer: 'zxcv', priority: 'Urgent', deadline: 'weeks' },
       { name: 'Nam3', doer: 'sdfg', priority: 'Medium', deadline: 'weeks' },
-      { name: 'Nam4', doer: 'asdf', priority: 'Urgent', deadline: 'weeks' },
-      { name: 'Nam5', doer: 'asdf', priority: 'Medium', deadline: 'weeks' },
-      { name: 'Nam6', doer: 'asdf', priority: 'Urgent', deadline: 'we' },
-      { name: 'Nam7', doer: 'asdf', priority: 'Blocker', deadline: 'tomor' },
     ]
     return (
       <div>
@@ -38,6 +40,7 @@ class TaskListViewer extends Component {
           dir={this.state.sortDirection}
           rows={ROWS}
           setViewer={this.props.setViewer}
+          onSort={this.onSort}
         />
         <TaskTablePager
           pad='4'
