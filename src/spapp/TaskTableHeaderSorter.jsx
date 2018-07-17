@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { TableRow } from './TableRow.jsx'
-import { TableCell } from './TableCell.jsx'
 import { Button } from './Button.jsx'
 
 class TaskTableHeaderSorter extends Component {
@@ -31,9 +30,15 @@ class TaskTableHeaderSorter extends Component {
   sorter_click(button) {
     let dir
     if (button === this.props.col) {
-      if ('up' === this.props.dir) { dir='down' } else { dir='up' }
-    } else { dir=this.props.dir }
-    this.props.onSort (button, dir)
+      if ('up' === this.props.dir) {
+        dir = 'down'
+      } else {
+        dir = 'up'
+      }
+    } else {
+      dir = this.props.dir
+    }
+    this.props.onSort(button, dir)
   }
 
   render() {
@@ -41,34 +46,47 @@ class TaskTableHeaderSorter extends Component {
       name: {
         caption: 'Name',
         variant: '',
-        onClick: () => this.sorter_click('name'),
+        onClick: () => {
+          return this.sorter_click('name')
+        },
       },
       doer: {
         caption: 'Doer',
         variant: '',
-        onClick: () => this.sorter_click('doer'),
+        onClick: () => {
+          return this.sorter_click('doer')
+        },
       },
       priority: {
         caption: 'Priority',
         variant: '',
-        onClick: () => this.sorter_click('priority'),
+        onClick: () => {
+          return this.sorter_click('priority')
+        },
       },
       deadline: {
         caption: 'Deadline',
         variant: '',
-        onClick: () => this.sorter_click('deadline'),
+        onClick: () => {
+          return this.sorter_click('deadline')
+        },
       },
     }
-    let cols = []
+    const cols = []
     let direction
-    if (this.props.dir === 'up') { direction = '↑' }
-    else { direction = '↓' }
-    Object.keys (buttons).forEach ( (name) => {
+    if (this.props.dir === 'up') {
+      direction = '↑'
+    } else {
+      direction = '↓'
+    }
+    Object.keys(buttons).forEach((name) => {
       if (name === this.props.col) {
         buttons[name].variant = 'header_default'
         buttons[name].caption = direction + buttons[name].caption
-      } else { buttons[name].variant = 'header' }
-      cols.push (<Button {...buttons[name]} />)
+      } else {
+        buttons[name].variant = 'header'
+      }
+      cols.push(<Button {...buttons[name]} />)
     })
     return (<TableRow cols={cols} />)
   }
