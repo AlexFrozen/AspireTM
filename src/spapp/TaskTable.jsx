@@ -30,6 +30,10 @@ class TaskTable extends Component {
     setViewer: PropTypes.func.isRequired,
     onSort: PropTypes.func.isRequired,
   }
+  static defaultProps = {
+    col: 'name',
+    dir: 'down',
+  }
 
   constructor(props) {
     super(props)
