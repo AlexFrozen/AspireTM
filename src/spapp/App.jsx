@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import mui_green from '@material-ui/core/colors/green'
+import mui_red from '@material-ui/core/colors/red'
 import PropTypes from 'prop-types'
 import { Top } from './Top.jsx'
 import { Desktop } from './Desktop.jsx'
@@ -48,27 +51,36 @@ class App extends Component {
   }
 
   render() {
+    const theme = createMuiTheme({
+      palette: {
+        type: 'dark',
+        primary: mui_green,
+        secondary: mui_red,
+      },
+    })
     return (
-      <div className='App-body'>
-        <div className='App-ribbon'>
-          <Top
-            apiUrl={this.props.apiUrl}
-            token={this.credentials.token}
-            authorized={this.state.authorized}
-            isAdmin={this.credentials.isAdmin}
-            firstName={this.credentials.firstName}
-            lastName={this.credentials.lastName}
-            viewer={this.state.viewer}
-            setViewer={this.setViewer}
-            didLogin={this.didLogin}
-            didLogout={this.didLogout}
-          />
-          <Desktop
-            viewer={this.state.viewer}
-            setViewer={this.setViewer}
-          />
+      <MuiThemeProvider theme={theme}>
+        <div className='App-body'>
+          <div className='App-ribbon'>
+            <Top
+              apiUrl={this.props.apiUrl}
+              token={this.credentials.token}
+              authorized={this.state.authorized}
+              isAdmin={this.credentials.isAdmin}
+              firstName={this.credentials.firstName}
+              lastName={this.credentials.lastName}
+              viewer={this.state.viewer}
+              setViewer={this.setViewer}
+              didLogin={this.didLogin}
+              didLogout={this.didLogout}
+            />
+            <Desktop
+              viewer={this.state.viewer}
+              setViewer={this.setViewer}
+            />
+          </div>
         </div>
-      </div>
+      </MuiThemeProvider>
     )
   }
 }
