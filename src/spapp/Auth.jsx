@@ -5,7 +5,6 @@ import { InputPass } from './InputPass.jsx'
 import { Label } from './Label.jsx'
 import { Button } from './Button.jsx'
 import Grid from '@material-ui/core/Grid'
-import './Top.less'
 
 class Auth extends Component {
   static propTypes = {
