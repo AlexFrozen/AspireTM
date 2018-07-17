@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { TableRow } from './TableRow.jsx'
+import { TableCell } from './TableCell.jsx'
 import { Button } from './Button.jsx'
 
 class TaskTableHeaderSorter extends Component {
@@ -14,40 +16,61 @@ class TaskTableHeaderSorter extends Component {
       'priority',
       'deadline',
     ]),
+    onSort: PropTypes.func.isRequired,
   }
-
   static defaultProps = {
     dir: 'down',
     col: 'deadline',
   }
 
+  constructor(props) {
+    super(props)
+    this.sorter_click = this.sorter_click.bind(this)
+  }
+
+  sorter_click(button) {
+    let dir
+    if (button === this.props.col) {
+      if ('up' === this.props.dir) { dir='down' } else { dir='up' }
+    } else { dir=this.props.dir }
+    this.props.onSort (button, dir)
+  }
+
   render() {
-    const captions = {
-      name: 'Name',
-      doer: 'Doer',
-      priority: 'Priority',
-      deadline: 'Deadline',
+    const buttons = {
+      name: {
+        caption: 'Name',
+        variant: '',
+        onClick: () => this.sorter_click('name'),
+      },
+      doer: {
+        caption: 'Doer',
+        variant: '',
+        onClick: () => this.sorter_click('doer'),
+      },
+      priority: {
+        caption: 'Priority',
+        variant: '',
+        onClick: () => this.sorter_click('priority'),
+      },
+      deadline: {
+        caption: 'Deadline',
+        variant: '',
+        onClick: () => this.sorter_click('deadline'),
+      },
     }
-    let direction = ''
-    if (this.props.dir === 'up') {
-      direction = '↑'
-    } else {
-      direction = '↓'
-    }
-    switch (this.props.col) {
-      case 'name': captions.name = direction + captions.name; break
-      case 'doer': captions.doer = direction + captions.doer; break
-      case 'priority': captions.priority = direction + captions.priority; break
-      case 'deadline': captions.deadline = direction + captions.deadline; break
-    }
-    return (
-      <tr>
-        <th><Button caption={captions.name} /></th>
-        <th><Button caption={captions.doer} /></th>
-        <th><Button caption={captions.priority} /></th>
-        <th><Button caption={captions.deadline} /></th>
-      </tr>
-    )
+    let cols = []
+    let direction
+    if (this.props.dir === 'up') { direction = '↑' }
+    else { direction = '↓' }
+    Object.keys (buttons).forEach ( (name) => {
+      if (name === this.props.col) {
+        buttons[name].variant = 'header_default'
+        buttons[name].caption = direction + buttons[name].caption
+      } else { buttons[name].variant = 'header' }
+      cols.push (<Button {...buttons[name]} />)
+    })
+    return (<TableRow cols={cols} />)
   }
 }
 
