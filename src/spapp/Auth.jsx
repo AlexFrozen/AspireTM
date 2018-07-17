@@ -4,6 +4,7 @@ import { InputEdit } from './InputEdit.jsx'
 import { InputPass } from './InputPass.jsx'
 import { Label } from './Label.jsx'
 import { Button } from './Button.jsx'
+import Grid from '@material-ui/core/Grid'
 import './Top.less'
 
 class Auth extends Component {
@@ -95,46 +96,62 @@ class Auth extends Component {
   }
 
   render() {
-    const elems = []
     if (this.props.authorized) {
       const fullName = `${this.props.firstName} ${this.props.lastName} `
-      elems.push(<Label
-        key='1'
-        caption={fullName}
-      />)
-      elems.push(<Button
-        key='2'
-        classKind='Menu'
-        caption='Logout'
-        onClick={this.doLogout}
-      />)
+      return (
+        <Grid
+          container
+          alignItems='center'
+          justify='flex-end'
+          direction='row'
+        >
+          <Grid item>
+            <Label
+              variant='badge'
+              caption={fullName}
+            />
+          </Grid>
+          <Grid item>
+            <Button
+              variant='menu'
+              caption='Log out'
+              onClick={this.doLogout}
+            />
+          </Grid>
+        </Grid>
+      )
     } else {
-      elems.push(<InputEdit
-        key='3'
-        classKind='input'
-        hint='E-Mail address'
-        value={this.state.login}
-        onChange={this.loginChange}
-      />)
-      elems.push(<InputPass
-        key='4'
-        classKind='input'
-        hint='Password'
-        value={this.state.pass}
-        onChange={this.passChange}
-      />)
-      elems.push(<Button
-        key='5'
-        classKind='Menu'
-        caption='Log in'
-        onClick={this.doLogin}
-      />)
+      return (
+        <Grid
+          container
+          alignItems='center'
+          justify='flex-end'
+          direction='row'
+        >
+          <Grid item>
+            <InputEdit
+              hint='E-Mail address'
+              value={this.state.login}
+              onChange={this.loginChange}
+            />
+          </Grid>
+          <Grid item>
+            <InputPass
+              hint='Password'
+              value={this.state.pass}
+              onChange={this.passChange}
+            />
+          </Grid>
+          <Grid item>
+            <Button
+              variant='menu'
+              caption='Log in'
+              onClick={this.doLogin}
+            />
+          </Grid>
+        </Grid>
+      )
     }
-    return (
-      <div className='Auth'>
-        {elems}
-      </div>
-    )
   }
 }
 
