@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import Grid from '@material-ui/core/Grid'
+import AppBar from '@material-ui/core/AppBar'
 import PropTypes from 'prop-types'
 import { SetOfButtons } from './SetOfButtons.jsx'
 import { Auth } from './Auth.jsx'
@@ -45,14 +47,14 @@ class Top extends Component {
     if (this.props.authorized) {
       if (this.props.viewer !== 'TaskEditor') {
         buttons.push({
-          classKind: 'Menu',
+          variant: 'menu',
           caption: 'New task',
           onClick: this.setTaskEditor,
         })
       }
       if (this.props.viewer !== 'TaskListViewer') {
         buttons.push({
-          classKind: 'Menu',
+          variant: 'menu',
           caption: 'Task list',
           onClick: this.setTaskListViewer,
         })
@@ -60,14 +62,14 @@ class Top extends Component {
       if (this.props.isAdmin) {
         if (this.props.viewer !== 'UserEditor') {
           buttons.push({
-            classKind: 'Menu',
+            variant: 'menu',
             caption: 'New user',
             onClick: this.setUserEditor,
           })
         }
         if (this.props.viewer !== 'UsersViewer') {
           buttons.push({
-            classKind: 'Menu',
+            variant: 'menu',
             caption: 'Users',
             onClick: this.setUsersViewer,
           })
@@ -76,18 +78,29 @@ class Top extends Component {
       toolbar = <SetOfButtons buttons={buttons} />
     }
     return (
-      <div className='Top'>
-        {toolbar}
-        <Auth
-          apiUrl={this.props.apiUrl}
-          token={this.props.token}
-          authorized={this.props.authorized}
-          firstName={this.props.firstName}
-          lastName={this.props.lastName}
-          didLogin={this.props.didLogin}
-          didLogout={this.props.didLogout}
-        />
-      </div>
+      <AppBar position='static'>
+        <Grid
+          container
+          alignItems='center'
+          justify='space-between'
+          direction='row'
+        >
+          <Grid item>
+            {toolbar}
+          </Grid>
+          <Grid item>
+            <Auth
+              apiUrl={this.props.apiUrl}
+              token={this.props.token}
+              authorized={this.props.authorized}
+              firstName={this.props.firstName}
+              lastName={this.props.lastName}
+              didLogin={this.props.didLogin}
+              didLogout={this.props.didLogout}
+            />
+          </Grid>
+        </Grid>
+      </AppBar>
     )
   }
 }
