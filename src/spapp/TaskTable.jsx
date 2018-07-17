@@ -5,7 +5,6 @@ import Material_TableBody from '@material-ui/core/TableBody'
 import PropTypes from 'prop-types'
 import { TaskTableHeaderSorter } from './TaskTableHeaderSorter.jsx'
 import { TableRow } from './TableRow.jsx'
-import './TaskTable.less'
 
 class TaskTable extends Component {
   static propTypes = {
