@@ -17,7 +17,6 @@ class TableRow extends Component {
     ]),
     onClick: PropTypes.func,
   }
-
   static defaultProps = {
     variant: 'simple',
     onClick: null,
@@ -32,8 +31,10 @@ class TableRow extends Component {
         val={col}
       />)
     })
-    let props = {}
-    if (this.props.onClick != null) { props.onClick=this.props.onClick }
+    const props = {}
+    if (this.props.onClick !== null) {
+      props.onClick = this.props.onClick
+    }
     switch (this.props.variant) {
       case 'hover': props.hover = true; break
     }
