@@ -1,16 +1,25 @@
 import React, { Component } from 'react'
+import Material_TableRow from '@material-ui/core/TableRow'
 import PropTypes from 'prop-types'
 import { TableCell } from './TableCell.jsx'
 
 class TableRow extends Component {
   static propTypes = {
-    cols: PropTypes.array.isRequired,
-    rowid: PropTypes.string,
+    cols: PropTypes.arrayOf(
+      PropTypes.oneOfType([
+        PropTypes.element.isRequired,
+        PropTypes.string.isRequired,
+      ]).isRequired
+    ).isRequired,
+    variant: PropTypes.oneOf([
+      'simple',
+      'hover',
+    ]),
     onClick: PropTypes.func,
   }
 
   static defaultProps = {
-    rowid: '',
+    variant: 'simple',
     onClick: null,
   }
 
@@ -23,13 +32,15 @@ class TableRow extends Component {
         val={col}
       />)
     })
+    let props = {}
+    if (this.props.onClick != null) { props.onClick=this.props.onClick }
+    switch (this.props.variant) {
+      case 'hover': props.hover = true; break
+    }
     return (
-      <tr
-        id={this.props.rowid}
-        onClick={this.props.onClick}
-      >
+      <Material_TableRow {...props}>
         {cols}
-      </tr>
+      </Material_TableRow>
     )
   }
 }
